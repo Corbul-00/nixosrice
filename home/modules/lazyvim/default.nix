@@ -13,7 +13,6 @@
       python3
     ];
 
-    # Tokyonight colorscheme with transparency
     plugins.colorscheme = ''
       return {
         "folke/tokyonight.nvim",
@@ -37,7 +36,6 @@
       }
     '';
 
-    # Dashboard header override — this is where it actually belongs
     plugins.dashboard = ''
       return {
         "nvimdev/dashboard-nvim",
@@ -56,6 +54,21 @@
             "",
           }
           return opts
+        end,
+        config = function(_, opts)
+          opts.config.header = {
+            "",
+            " ███████╗██╗     ██╗  ██╗██╗   ██╗",
+            " ██╔════╝██║     ██║ ██╔╝██║   ██║",
+            " █████╗  ██║     █████╔╝ ██║   ██║",
+            " ██╔══╝  ██║     ██╔═██╗ ╚██╗ ██╔╝",
+            " ██║     ███████╗██║  ██╗ ╚████╔╝ ",
+            " ╚═╝     ╚══════╝╚═╝  ╚═╝  ╚═══╝  ",
+            "",
+            "            FlakaVim",
+            "",
+          }
+          require("dashboard").setup(opts)
         end,
       }
     '';
