@@ -6,33 +6,12 @@
 
   programs.lazyvim = {
     enable = true;
-
-    # Core dependencies (git, ripgrep, fd are already included by installCoreDependencies)
     installCoreDependencies = true;
 
     extraPackages = with pkgs; [
       nodejs
       python3
     ];
-
-    # Custom dashboard header: big FLKV + small FlakaVim underneath
-    config.options = ''
-      -- FLKV dashboard header
-      vim.g.lazyvim_opts = vim.g.lazyvim_opts or {}
-      vim.g.lazyvim_opts.defaults = vim.g.lazyvim_opts.defaults or {}
-      vim.g.lazyvim_opts.defaults.header = {
-        "",
-        " ███████╗██╗     ██╗  ██╗██╗   ██╗",
-        " ██╔════╝██║     ██║ ██╔╝██║   ██║",
-        " █████╗  ██║     █████╔╝ ██║   ██║",
-        " ██╔══╝  ██║     ██╔═██╗ ╚██╗ ██╔╝",
-        " ██║     ███████╗██║  ██╗ ╚████╔╝ ",
-        " ╚═╝     ╚══════╝╚═╝  ╚═╝  ╚═══╝  ",
-        "",
-        "            FlakaVim",
-        "",
-      }
-    '';
 
     # Tokyonight colorscheme with transparency
     plugins.colorscheme = ''
@@ -54,6 +33,29 @@
         config = function(_, opts)
           require("tokyonight").setup(opts)
           vim.cmd.colorscheme("tokyonight-night")
+        end,
+      }
+    '';
+
+    # Dashboard header override — this is where it actually belongs
+    plugins.dashboard = ''
+      return {
+        "nvimdev/dashboard-nvim",
+        opts = function(_, opts)
+          opts.config = opts.config or {}
+          opts.config.header = {
+            "",
+            " ███████╗██╗     ██╗  ██╗██╗   ██╗",
+            " ██╔════╝██║     ██║ ██╔╝██║   ██║",
+            " █████╗  ██║     █████╔╝ ██║   ██║",
+            " ██╔══╝  ██║     ██╔═██╗ ╚██╗ ██╔╝",
+            " ██║     ███████╗██║  ██╗ ╚████╔╝ ",
+            " ╚═╝     ╚══════╝╚═╝  ╚═╝  ╚═══╝  ",
+            "",
+            "            FlakaVim",
+            "",
+          }
+          return opts
         end,
       }
     '';
