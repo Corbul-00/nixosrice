@@ -9,30 +9,23 @@
     ./home/modules/kitty/default.nix
     ./home/modules/hyprland/default.nix
     ./home/modules/waybar/default.nix
-    #./home/modules/zsh/zsh.nix
-  ];
+    ./home/modules/fish/default.nix
+    ./home/modules/gtk/default.nix # Comment: Added global GTK theme configuration.
+    ./home/modules/fastfetch/default.nix
+    ./home/modules/btop/default.nix
+    ./home/modules/librewolf/default.nix
+  ]; 
 
 
-  programs.zsh = {
-	  enable = true;
-	  oh-my-zsh = {
-		  enable = true;
-		  plugins = [
-			  "git"
-		  ];
-	  };
-	  plugins = [
-	  {
-		  name = "powerlevel10k";
-		  src = pkgs.zsh-powerlevel10k;
-		  file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-	  }
-	  ];
-	  initExtra = ''
-		  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-		  '';
+  #Cursor
+
+  home.pointerCursor = {
+  name = "Frieren"; # Tem que bater com o nome da pasta (mkdir) criada acima
+  package = pkgs.callPackage ./home/modules/frieren/default.nix {};
+  size = 24;
+  gtk.enable = true;
+  x11.enable = true;
   };
-
 
 
   #Basic Neovim

@@ -40,6 +40,7 @@
         "SWWW_TRANSITION_FPS,60"
         "SWWW_TRANSITION_STEP,1"
         "SWWW_TRANSITION_TYPE,simple"
+	"XFT_DPI,150"
       ];
 
       # -------------------------------

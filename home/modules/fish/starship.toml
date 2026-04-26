@@ -1,0 +1,55 @@
+# ─── Ordem exata dos elementos ────────────────────────────────
+format = "$os$directory$fill$time$line_break$character"
+
+# ─── Setinha e a voltinha inferior (╰─) ───────────────────────
+[character]
+success_symbol = "[╰─](dimmed white)[❯](bold purple) "
+error_symbol   = "[╰─](dimmed white)[❯](bold red) "
+vimcmd_symbol  = "[╰─](dimmed white)[❮](bold purple) "
+
+[line_break]
+disabled = false
+
+# ─── Sistema Operacional e a voltinha superior (╭─) ───────────
+[os]
+disabled = false
+style    = "bold cyan"
+format   = "[╭─](dimmed white)[ $symbol ]($style)"
+
+[os.symbols]
+Arch        = ""
+Ubuntu      = ""
+Debian      = ""
+Fedora      = ""
+CentOS      = ""
+NixOS       = ""
+Manjaro     = ""
+openSUSE    = ""
+EndeavourOS = ""
+Gentoo      = ""
+Alpine      = ""
+Raspbian    = ""
+Windows     = "󰍲"
+Macos       = ""
+Linux       = ""
+
+# ─── Diretório ────────────────────────────────────────────────
+[directory]
+style             = "bold blue"
+truncation_length = 3
+truncate_to_repo  = true
+read_only         = " 󰌾"
+home_symbol       = " "
+format            = "[$path ]($style)[$read_only](red)"
+
+# ─── A Linhazona contínua no meio ─────────────────────────────
+[fill]
+symbol = "─"
+style  = "dimmed white"
+
+# ─── Horário e a voltinha da direita (─╮) ─────────────────────
+[time]
+disabled    = false
+style       = "bold white"
+format      = "[ ⏱️ $time ]($style)[─╮](dimmed white)"
+time_format = "%H:%M:%S"

@@ -135,5 +135,6 @@
      jetbrains-mono
      font-awesome_6
      playerctl
+     pkgs.nerd-fonts.jetbrains-mono # Ensure Nerd Font glyphs are available for Waybar icons
   ];
 }

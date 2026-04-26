@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 {
@@ -14,21 +10,41 @@
    nixpkgs.config.allowUnfree = true;
 
   #GPU SYNC
-  # hardware.nvidia.prime = {
-  #   sync.enable = true;
-  #   #I
-  #   intelBusId= "PCI:0:0:0";
-  #   #D
-  #   nvidiaBusId = "PCI:0:0:0"
-  # };
+   hardware.nvidia.prime = {
+     sync.enable = true;
+     #I
+     intelBusId= "PCI:00:02:0";
+     #D
+     nvidiaBusId = "PCI:01:00:0";
+   };
 
 
   #Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  #Kernel
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  boot.extraModprobeConfig = ''
+    options iwlwifi power_save=0
+  '';
+
+  boot.kernelParams = [
+    "split_lock_detect=off"
+  ];
+
+  boot.kernel.sysctl = {
+    "vm.max_map_count" = 2147483642;
+  };
+
+  # Zram 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
 
   networking.hostName = "waifuroom"; 
 
@@ -65,6 +81,10 @@
    users.users.corbul = {
      isNormalUser = true;
      extraGroups = [ "wheel" "networkmanager" "video" "audio" ]; # Enable ‘sudo’ for the user.
+
+     #Fish
+
+     shell = pkgs.fish;
      packages = with pkgs; [
        tree
      ];
@@ -83,7 +103,8 @@
   environment.systemPackages = with pkgs; [
     vim
     neovim
-    xfce.thunar
+    ntfs3g
+    #xfce.thunar
     kitty
     waybar
     wget
@@ -105,6 +126,7 @@
     heroic
     ani-cli
     mpv
+    fzf
     termusic
     p7zip
     pavucontrol
@@ -120,6 +142,21 @@
     brightnessctl
     wireplumber
     gemini-cli
+    discord
+    imv
+    termusic
+    ffmpeg
+    keepassxc
+    protonmail-desktop
+    protonvpn-gui
+    (import ./home/modules/hashdating/default.nix { inherit pkgs; })
+    kdePackages.gwenview
+    stash
+    librewolf
+    obsidian
+    direnv
+    nix-direnv
+    gh
   ];
 
   #HYPRLAND_SDDM
@@ -136,20 +173,34 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
+  
+  #Thunar
 
+  # Habilita o programa e sua integração no sistema
+  programs.thunar.enable = true;
+
+# Opcional: Adiciona plugins úteis (como extração de arquivos e controle de discos)
+  programs.thunar.plugins = with pkgs.xfce; [
+    thunar-archive-plugin
+    thunar-volman
+  ];
+
+# Opcional, mas altamente recomendado: Suporte para lixeira, pen drives e miniaturas
+services.gvfs.enable = true; # Montagem automática, lixeira e redes
+services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   
   #NVIDIA_DO_DIABO
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-  #hardware.nvidia = {
-  #  modesetting.enable = true;
-  #  powerManagement.enable = true; 
-  #  open = false;  
-  #  nvidiaSettings = true;
-  #  package = config.boot.kernelPackages.nvidiaPackages.stable;
-  #};
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true; 
+    open = false;  
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
   
-  #services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   #STEAM
 
@@ -158,14 +209,13 @@
   programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
   programs.gamemode.enable = true;
 
-  #ZSH
- 
+  #Shell
+  programs.fish.enable = true;
 
-    
-    programs.zsh.enable = true;
-    # Your user shell (you already have this or similar)
-    users.defaultUserShell = pkgs.zsh;
+  #Flakes experimental and direnv
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  programs.direnv.enable = true;
 
 
 
@@ -216,4 +266,3 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-

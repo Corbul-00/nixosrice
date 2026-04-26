@@ -1,0 +1,148 @@
+/* Comment: This section defines global font and text color for all GTK applications.
+   It overrides default GTK settings to ensure consistency across applications. */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+    color: #d8c2f0; /* Light purple text */
+}
+
+/* Comment: Applies a dark purple background to main application windows, matching the Waybar theme.
+   This sets a consistent visual base for all applications.
+   Added backdrop-filter for blur effect, relying on compositor support. */
+window {
+    background-color: rgba(60, 50, 80, 0.7); /* Dark purple, matching Waybar */
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(10px);
+}
+
+/* Comment: Generalizing background colors for common GTK elements like views, sidebars, toolbars, etc.
+   This aims to apply the dark theme consistently to various parts of most applications.
+   This replaces previous Thunar-specific background rules.
+   Added backdrop-filter for blur effect. */
+.background,
+.view,
+.sidebar,
+.toolbar,
+.list-row,
+.headerbar,
+.csd {
+    background-color: rgba(40, 30, 60, 0.75);
+    color: #d8c2f0;
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(8px);
+}
+
+/* Comment: Overriding Thunar-specific backgrounds to ensure they match the general dark theme.
+   This ensures that Thunar's specific components (like file list borders and sidebar)
+   adhere to the desired color scheme even if general rules are applied.
+   Added backdrop-filter for blur effect. */
+.thunar .standard-view frame > border,
+.thunar .sidebar {
+    background-color: rgba(40, 30, 60, 0.75);
+    color: #d8c2f0;
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(8px);
+}
+
+/* Comment: Specifically styling Thunar's toolbar for consistency with the overall theme.
+   Added backdrop-filter for blur effect. */
+.thunar toolbar {
+    background: rgba(40, 30, 60, 0.85);
+    color: #d8c2f0;
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(8px);
+}
+
+/* Comment: Generalizing button styles across all GTK applications.
+   This provides a vibrant purple background for buttons and white text,
+   with rounded corners for a modern look. This replaces Thunar-specific button rules. */
+button {
+    background: #8b5cf6; /* Vibrant purple */
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+/* Comment: Defines the hover effect for all buttons, changing to a lighter purple.
+   This provides visual feedback when interacting with buttons. */
+button:hover {
+    background: #a78bfa; /* Lighter purple on hover */
+}
+
+/* Comment: Ensures file view backgrounds (like in Thunar) are dark,
+   preventing any white areas and maintaining the dark theme.
+   This replaces Thunar-specific view background rules.
+   Added backdrop-filter for blur effect. */
+.view,
+.view scrolledwindow,
+.view treeview {
+    background-color: rgba(40, 30, 60, 0.7);
+    color: #d8c2f0;
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(8px);
+}
+
+/* Comment: More specific styling for input fields (like Wofi search and Thunar directory bar)
+   to ensure dark purple background, text color, and blur. */
+entry {
+    background-color: rgba(40, 30, 60, 0.9); /* Darker, less transparent for input fields */
+    color: #d8c2f0;
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(139, 92, 246, 0.5); /* Subtle border matching button color */
+    border-radius: 3px;
+}
+
+/* Comment: Ensuring menus and popovers (used for right-click menus) maintain the dark purple theme
+   and blur. These are often separate widgets from regular windows.
+   Increased specificity and removed default background/borders. */
+menu, /* Targeting the 'menu' element directly */
+menuitem, /* Targeting 'menuitem' directly */
+popover, /* Targeting 'popover' directly */
+.csd popover,
+.background.menu,
+.popup.menu,
+.context-menu, /* Targeting common context menu class */
+.tooltip, /* Targeting tooltips as they often behave similarly to menus */
+GtkMenu, /* NEW: Explicitly target GtkMenu widget */
+GtkPopover, /* NEW: Explicitly target GtkPopover widget */
+window.popup.menu /* NEW: Target pop-up menus more generally */
+{
+    background-color: rgba(40, 30, 60, 0.9); /* Darker, less transparent for menus */
+    background-image: none; /* Remove any default gradients */
+    border: 1px solid rgba(139, 92, 246, 0.5); /* Subtle border for menus */
+    border-radius: 5px; /* Added some rounding to menus */
+    color: #d8c2f0; /* Ensure text color */
+    /* NEW: Add blur effect for transparency and matching Hyprland style */
+    backdrop-filter: blur(8px);
+    box-shadow: none; /* Remove any default box shadows */
+}
+
+/* Comment: Hover state for menu items - ensuring it's dark purple */
+menuitem:hover,
+menuitem:selected, /* Also target selected state */
+.menuitem:hover,
+.menuitem:selected {
+    background-color: rgba(139, 92, 246, 0.7); /* Vibrant purple on hover */
+    background-image: none; /* Remove any default gradients */
+    color: #ffffff; /* White text on hover */
+    border: none; /* Remove border on hover to avoid double borders */
+}
+
+/* NEW: Force background on certain generic elements with !important */
+.menu,
+.menuitem,
+.popover,
+.tooltip,
+GtkMenu, /* NEW: Explicitly target GtkMenu widget with !important */
+GtkPopover, /* NEW: Explicitly target GtkPopover widget with !important */
+window.popup.menu /* NEW: Target pop-up menus more generally with !important */
+{
+    background: rgba(40, 30, 60, 0.9) !important; /* Use !important for stubborn backgrounds */
+    border: 1px solid rgba(139, 92, 246, 0.5) !important;
+}
+
+.menuitem:hover,
+.menuitem:selected {
+    background: rgba(139, 92, 246, 0.7) !important;
+    border: none !important;
+}
