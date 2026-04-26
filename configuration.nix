@@ -157,6 +157,7 @@
     direnv
     nix-direnv
     gh
+    obs-studio
   ];
 
   #HYPRLAND_SDDM
