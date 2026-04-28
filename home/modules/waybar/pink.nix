@@ -83,7 +83,7 @@
       /* === KAWAI MOE PINK THEME CHANGES === */
       #waybar {
         background: rgba(255, 182, 193, 0.92);     /* Soft Kawaii Pink - Moe anime style */
-        color: #4a1a2f;                            /* Deep rose/magenta text - high contrast and cute */
+        color: #ff4d94;                            /* Deep rose/magenta text - high contrast and cute */
         border-radius: 18px;
         border: 2px solid #ff4d94;                 /* Vibrant matching red-pink border */
         box-shadow: 0 4px 15px rgba(255, 77, 148, 0.25);
