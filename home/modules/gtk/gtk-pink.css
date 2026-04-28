@@ -1,0 +1,121 @@
+/* ============================================= */
+/*   KAWAI MOE PINK GTK THEME - Matching Waybar  */
+/*   Main color: #ff4d94 (vibrant pink)          */
+/* ============================================= */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 16px;
+    color: #ff4d94;                  /* Main text = same bright pink as Waybar */
+}
+
+/* Main window background - soft kawaii pink with transparency + blur */
+window {
+    background-color: rgba(255, 182, 193, 0.75);   /* Soft moe pink */
+    backdrop-filter: blur(12px);
+}
+
+/* General containers and views */
+.background,
+.view,
+.sidebar,
+.toolbar,
+.list-row,
+.headerbar,
+.csd {
+    background-color: rgba(255, 182, 193, 0.70);
+    color: #ff4d94;
+    backdrop-filter: blur(10px);
+}
+
+/* Thunar specific */
+.thunar .standard-view frame > border,
+.thunar .sidebar {
+    background-color: rgba(255, 182, 193, 0.70);
+    color: #ff4d94;
+    backdrop-filter: blur(10px);
+}
+
+.thunar toolbar {
+    background: rgba(255, 182, 193, 0.82);
+    color: #ff4d94;
+    backdrop-filter: blur(10px);
+}
+
+/* Buttons - vibrant pink matching Waybar */
+button {
+    background: #ff4d94;           /* Same pink as Waybar border */
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #ff6eb5;           /* Lighter pink on hover (cute moe effect) */
+}
+
+/* File views */
+.view,
+.view scrolledwindow,
+.view treeview {
+    background-color: rgba(255, 182, 193, 0.68);
+    color: #ff4d94;
+    backdrop-filter: blur(10px);
+}
+
+/* Input fields (search bars, address bar, etc.) */
+entry {
+    background-color: rgba(255, 182, 193, 0.85);
+    color: #ff4d94;
+    backdrop-filter: blur(6px);
+    border: 1px solid #ff4d94;
+    border-radius: 3px;
+}
+
+/* Menus, popovers, context menus, tooltips */
+menu,
+menuitem,
+popover,
+.csd popover,
+.background.menu,
+.popup.menu,
+.context-menu,
+.tooltip,
+GtkMenu,
+GtkPopover,
+window.popup.menu {
+    background-color: rgba(255, 182, 193, 0.92) !important;
+    background-image: none;
+    border: 1px solid #ff4d94;
+    border-radius: 5px;
+    color: #ff4d94;
+    backdrop-filter: blur(10px);
+    box-shadow: none;
+}
+
+/* Menu item hover */
+menuitem:hover,
+menuitem:selected,
+.menuitem:hover,
+.menuitem:selected {
+    background-color: #ff4d94 !important;
+    color: #ffffff !important;
+    border: none !important;
+}
+
+/* Force important rules for stubborn elements */
+.menu,
+.menuitem,
+.popover,
+.tooltip,
+GtkMenu,
+GtkPopover,
+window.popup.menu {
+    background: rgba(255, 182, 193, 0.92) !important;
+    border: 1px solid #ff4d94 !important;
+}
+
+.menuitem:hover,
+.menuitem:selected {
+    background: #ff4d94 !important;
+    color: #ffffff !important;
+}
