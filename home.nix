@@ -7,7 +7,7 @@
  
   imports = [
     ./home/modules/kitty/pink.nix
-    ./home/modules/hyprland/default.nix
+    ./home/modules/hyprland/pink.nix
     ./home/modules/waybar/pink.nix
     ./home/modules/fish/default.nix
     ./home/modules/gtk/pink.nix # Comment: Added global GTK theme configuration.
