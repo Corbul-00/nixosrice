@@ -6,7 +6,7 @@
   
  
   imports = [
-    ./home/modules/kitty/default.nix
+    ./home/modules/kitty/pink.nix
     ./home/modules/hyprland/default.nix
     ./home/modules/waybar/pink.nix
     ./home/modules/fish/default.nix
