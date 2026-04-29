@@ -15,6 +15,7 @@
     ./home/modules/btop/default.nix
     ./home/modules/librewolf/default.nix
     ./home/modules/lazyvim/default.nix
+    ./home/modules/mangohud/default.nix
   ]; 
 
 
