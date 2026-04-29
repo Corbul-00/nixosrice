@@ -112,6 +112,7 @@
     wine
     wineWowPackages.staging
     protonup-ng
+    protonup-qt
     protonplus
     zsh
     zsh-powerlevel10k
