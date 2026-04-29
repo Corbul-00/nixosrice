@@ -163,6 +163,7 @@
     nix-direnv
     gh
     obs-studio
+    blender-bin
   ];
 
   #HYPRLAND_SDDM
