@@ -112,6 +112,7 @@
     wine
     wineWowPackages.staging
     protonup-ng
+    protonplus
     zsh
     zsh-powerlevel10k
     zsh-autosuggestions
