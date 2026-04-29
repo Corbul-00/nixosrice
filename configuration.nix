@@ -126,6 +126,8 @@
     cava
     cbonsai
     heroic
+    mangohud
+    cmatrix
     ani-cli
     mpv
     fzf
