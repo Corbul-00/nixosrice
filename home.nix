@@ -16,6 +16,7 @@
     ./home/modules/librewolf/default.nix
     ./home/modules/lazyvim/default.nix
     ./home/modules/mangohud/default.nix
+    ./home/modules/yazi/pink.nix
   ]; 
 
 
