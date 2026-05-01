@@ -11,7 +11,7 @@
     ./home/modules/waybar/pink.nix
     ./home/modules/fish/default.nix
     ./home/modules/gtk/pink.nix # Comment: Added global GTK theme configuration.
-    ./home/modules/fastfetch/default.nix
+    ./home/modules/fastfetch/pink.nix
     ./home/modules/btop/default.nix
     ./home/modules/librewolf/default.nix
     ./home/modules/lazyvim/default.nix
