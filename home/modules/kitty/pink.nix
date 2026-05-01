@@ -20,7 +20,7 @@
       cursor = "#ff4d94";               # Cursor matches the accent pink
       cursor_shape = "beam";
 
-      selection_background = "#ff4d94"; # Selection background = vibrant pink
+      selection_background = "#d8c2f0"; # Selection background = vibrant pink
       selection_foreground = "#ffffff"; # White text on selection for contrast
 
       # Tab bar styling
