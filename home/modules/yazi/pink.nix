@@ -113,7 +113,7 @@
 
           # documents
           { mime = "application/pdf";  fg = "#ed1cc1"; }
-          { mime = "text/*";           fg = "#e332db"; }
+          { mime = "text/*";           fg = "#e33261"; }
 
           # executables
           { mime = "application/x-executable"; fg = "#ff4d94"; bold = true; }
