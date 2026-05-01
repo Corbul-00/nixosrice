@@ -112,8 +112,8 @@
           { mime = "application/zstd";                   fg = "#c0004e"; }
 
           # documents
-          { mime = "application/pdf";  fg = "#ff85c2"; }
-          { mime = "text/*";           fg = "#ffb6d9"; }
+          { mime = "application/pdf";  fg = "#ed1cc1"; }
+          { mime = "text/*";           fg = "#e332db"; }
 
           # executables
           { mime = "application/x-executable"; fg = "#ff4d94"; bold = true; }
