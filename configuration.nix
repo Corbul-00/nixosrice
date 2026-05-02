@@ -163,6 +163,7 @@
     nix-direnv
     gh
     obs-studio
+    libreoffice
   ];
 
   #HYPRLAND_SDDM
