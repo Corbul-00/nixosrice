@@ -164,6 +164,8 @@
     gh
     obs-studio
     libreoffice
+    nix-output-monitor
+    nvd
   ];
 
   #HYPRLAND_SDDM
