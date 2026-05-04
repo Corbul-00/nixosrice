@@ -96,6 +96,12 @@
     enableDefaultPackages = true;     # usually already true, but good to have
     fontconfig.enable     = true;     # enables font cache → very important
   };
+  
+  #Env-Variables 
+  
+  environment.variables = {
+    NH_FLAKE = "/etc/nixos";
+  };
 
 
   # List packages installed in system profile.
