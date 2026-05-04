@@ -215,6 +215,15 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   programs.steam.gamescopeSession.enable = true;
   programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
   programs.gamemode.enable = true;
+  
+  #NixHelper - NH
+
+  programs.nh = {
+    enable = true;
+    flake = "/etc/nixos";
+
+    clean.enable = true;
+  };
 
   #Shell
   programs.fish.enable = true;
