@@ -224,6 +224,17 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
 
     clean.enable = true;
   };
+  
+  #Doas
+
+  security.doas = {
+    enable = true;
+    extraRules = [{
+      users = [ "corbul" ];
+      keepEnv = true;
+      persist = true;
+    }];
+ };
 
   #Shell
   programs.fish.enable = true;
