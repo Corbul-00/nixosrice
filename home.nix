@@ -17,6 +17,7 @@
     ./home/modules/lazyvim/default.nix
     ./home/modules/mangohud/default.nix
     ./home/modules/yazi/default.nix
+    ./home/modules/eza/default.nix
   ]; 
 
 
