@@ -49,13 +49,13 @@
     shellAliases = {
       myfetch = "fastfetch";
       # Seus aliases convertidos
-      #cd = "z";
+      cd = "z";
       cat = "bat --paging=never --style=plain --color=always";
       vimconfig = "cd /etc/nixos/nvim/ && nvim";
       nixconfig = "cd /etc/nixos/ && nvim";
       hdmount = "sudo mkdir -p /run/media/corbul/Data && sudo mount -t ntfs-3g -o rw,uid=1000,gid=1000,umask=000,windows_names /dev/sda1 /run/media/corbul/Data";
       hdumount = "sudo umount /run/media/corbul/Data";
-      #ls = "eza --icons --group-directories-first --color=always --git --time-style=long-iso";
+      ls = "eza --icons --group-directories-first --color=always --git --time-style=long-iso";
       vi = "nvim";
       ec = "emacsclient -n";
 
