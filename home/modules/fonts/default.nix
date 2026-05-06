@@ -7,6 +7,8 @@
   home.packages = with pkgs; [
     # Fonte principal com Nerd Font patches (recomendado para 25.11+)
     nerd-fonts.jetbrains-mono
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
 
     # Opcional: se quiser mais símbolos extras
     # nerd-fonts.symbols-only
