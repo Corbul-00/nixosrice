@@ -172,6 +172,8 @@
     libreoffice
     nix-output-monitor
     nvd
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
   ];
 
   #HYPRLAND_SDDM
