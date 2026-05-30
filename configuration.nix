@@ -255,7 +255,12 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   programs.direnv.enable = true;
 
-
+  #AppImage Enable
+   
+  programs.appimage = {
+      enable = true;
+      binfmt = true;
+    };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
