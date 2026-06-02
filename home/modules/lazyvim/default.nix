@@ -57,5 +57,29 @@
         },
       }
     '';
+
+    plugins.cord = ''
+      return {
+        dir = "${pkgs.vimPlugins.cord-nvim}",
+        opts = {
+          usercmds = true,
+          log_level = "error",
+          editor = {
+            client = "neovim",
+            tooltip = "FlakaVim",
+          },
+          display = {
+            theme = "default",
+            flavor = "dark",
+          },
+          idle = {
+            enable = true,
+            timeout = 300000, -- 5 minutes
+            text = "Taking a break",
+          },
+        },
+      }
+    '';
+
   };
 }
