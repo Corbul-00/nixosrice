@@ -175,7 +175,6 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     kdePackages.kdenlive
-    teamspeak3
   ];
 
   #HYPRLAND_SDDM
