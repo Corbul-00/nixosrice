@@ -263,6 +263,29 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
       binfmt = true;
     };
 
+  #NixLd, for non traditional games 
+  
+  programs.nix-ld.enable = true;
+  
+  programs.nix-ld.libraries = with pkgs; [
+    # Common libs for UE games + general
+    stdenv.cc.cc.lib
+    alsa-lib
+    libpulseaudio
+    udev
+    openssl
+    vulkan-loader
+    libGL
+    xorg.libX11
+    xorg.libXrandr
+    xorg.libXcursor
+    xorg.libXi
+    xorg.libXinerama
+    xorg.libXScrnSaver
+    # Add more if it complains (see below)
+  ];
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
