@@ -176,6 +176,7 @@
     noto-fonts-cjk-serif
     kdePackages.kdenlive
     jami
+    gimp
   ];
 
   #HYPRLAND_SDDM
