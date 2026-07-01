@@ -177,6 +177,7 @@
     kdePackages.kdenlive
     jami
     gimp
+    opencode
   ];
 
   #HYPRLAND_SDDM
