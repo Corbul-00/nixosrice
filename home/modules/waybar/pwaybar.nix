@@ -123,6 +123,11 @@
     source = ./eww/scripts/mpris-info.sh;
     executable = true;
   };
+  xdg.configFile."eww/scripts/cava.sh" = {
+    source = ./eww/scripts/cava.sh;
+    executable = true;
+  };
+
 
   home.packages = with pkgs; [
      jetbrains-mono

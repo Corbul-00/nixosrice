@@ -7,7 +7,7 @@
   color: #d8c2f0;
   border-radius: 14px;
   border: 2px solid #33ccff;
-  padding: 12px;
+  padding: 14px;
 }
 
 .divider {
@@ -16,50 +16,99 @@
   margin: 8px 0;
 }
 
-.mpris-section {
-  .art {
-    border-radius: 8px;
-    margin-right: 10px;
-  }
-  .title {
-    font-weight: bold;
-    color: #d8c2f0;
-    font-size: 13px;
-  }
-  .artist {
-    color: #c4b5fd;
-    font-size: 12px;
-  }
-  .timestamp {
-    color: #8b5cf6;
-    font-size: 11px;
-    margin-top: 2px;
-  }
+/* ---------------- left column ---------------- */
+.profile-column {
+  min-width: 150px;
 }
 
-.sysinfo-section {
-  .info-row {
-    margin: 3px 0;
-  }
-  .icon {
-    color: #33ccff;
-    font-size: 16px;
-    margin-right: 8px;
-  }
-  .info-label {
-    color: #d8c2f0;
-    font-size: 13px;
-  }
+.pfp-box {
+  /* This is the actual profile picture. Swap the file at this path
+     to change your pfp -- no rebuild needed, eww re-reads it live. */
+  background-image: url("/etc/nixos/home/modules/waybar/assets/pfp.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 999px;    /* keep this at/above half the box size for a circle */
+  min-width: 80px;
+  min-height: 80px;
+  margin-bottom: 6px;
 }
 
-.user-section {
-  .pfp {
-    border-radius: 20px;
-    margin-right: 10px;
-  }
-  .username {
-    color: #8b5cf6;
-    font-weight: bold;
-    font-size: 13px;
-  }
+.username {
+  color: #8b5cf6;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.info-row {
+  margin: 3px 0;
+}
+.icon {
+  color: #33ccff;
+  font-size: 16px;
+  margin-right: 8px;
+}
+.info-label {
+  color: #d8c2f0;
+  font-size: 13px;
+}
+
+/* ---------------- right column ---------------- */
+.media-column {
+  min-width: 260px;
+}
+
+.art-box {
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(139, 92, 246, 0.25); /* shows through if no art available */
+  border-radius: 999px;
+  min-width: 70px;
+  min-height: 70px;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-weight: bold;
+  color: #d8c2f0;
+  font-size: 13px;
+}
+.artist {
+  color: #c4b5fd;
+  font-size: 12px;
+}
+.timestamp {
+  color: #8b5cf6;
+  font-size: 11px;
+  margin: 2px 0 6px 0;
+}
+
+.controls {
+  margin-top: 4px;
+}
+.ctrl-btn {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 2px 6px;
+  min-height: 0;
+}
+.ctrl-btn:hover {
+  background-color: rgba(139, 92, 246, 0.25);
+  border-radius: 6px;
+}
+.ctrl-icon {
+  color: #d8c2f0;
+  font-size: 16px;
+}
+
+/* ---------------- bottom: cava ---------------- */
+.cava-row {
+  margin-top: 10px;
+  min-height: 50px;
+}
+.cava-bar {
+  min-width: 4px;                 /* bar thickness -- raise for chunkier bars */
+  background-color: #8b5cf6;      /* bar color -- try #33ccff to match the border instead */
+  border-radius: 2px;
 }

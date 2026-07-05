@@ -1,11 +1,22 @@
 ;; eww/eww.yuck
+;; ---------------------------------------------------------------
+;; mpris-dashboard layout:
+;;   left column  -> pfp (circle) + username + NixOS row + Hyprland row
+;;   right column -> album art (circle) + title/artist/time + controls
+;;   bottom row   -> cava bars, full width, left to right
+;; ---------------------------------------------------------------
 
 (defpoll mpris-data :interval "1s" "bash $HOME/.config/eww/scripts/mpris-info.sh")
 (defpoll username :interval "1h" "whoami")
+;; deflisten (not defpoll) because cava.sh is a long-running stream,
+;; not a one-shot command -- every line it prints updates cava-data live.
+(deflisten cava-data :initial "[]" "bash $HOME/.config/eww/scripts/cava.sh")
 
 (defwindow mpris-dashboard
   :monitor 0
-  :geometry (geometry :x "0px" :y "36px" :width "320px" :height "230px" :anchor "top center")
+  ;; Bumped up from 320x230 to fit the new layout.
+  ;; If the popup doesn't line up under your mpris module, tweak :x/:y here.
+  :geometry (geometry :x "0px" :y "36px" :width "480px" :height "320px" :anchor "top center")
   :stacking "fg"
   :layer "top"
   :exclusive false
@@ -14,30 +25,50 @@
 
 (defwidget dashboard []
   (box :class "dashboard" :orientation "v" :space-evenly false
-    (mpris-section)
+    (box :orientation "h" :space-evenly false :spacing 14
+      (profile-column)
+      (media-column))
     (box :class "divider")
-    (sysinfo-section)
-    (box :class "divider")
-    (user-section)))
+    (cava-row)))
 
-(defwidget mpris-section []
-  (box :class "mpris-section" :orientation "h" :space-evenly false
-    (image :class "art" :path {mpris-data.art} :image-width 60 :image-height 60)
-    (box :class "mpris-text" :orientation "v" :space-evenly false
-      (label :class "title" :text {mpris-data.title} :limit-width 28 :halign "start")
-      (label :class "artist" :text {mpris-data.artist} :limit-width 28 :halign "start")
-      (label :class "timestamp" :text "${mpris-data.position} / ${mpris-data.length}" :halign "start"))))
-
-(defwidget sysinfo-section []
-  (box :class "sysinfo-section" :orientation "v" :space-evenly false
+;; ============ LEFT: pfp / username / NixOS / Hyprland ============
+(defwidget profile-column []
+  (box :class "profile-column" :orientation "v" :space-evenly false :valign "start"
+    (box :class "pfp-box")   ;; circular pfp, image set via CSS background in eww.scss
+    (label :class "username" :text {username})
     (box :class "info-row" :orientation "h" :space-evenly false
-      (label :class "icon" :text "")
+      (label :class "icon" :text "")   ;; NixOS (nf-linux-nixos, this one's confirmed real)
       (label :class "info-label" :text "NixOS"))
     (box :class "info-row" :orientation "h" :space-evenly false
+      ;; PLACEHOLDER: no official Hyprland glyph exists in Nerd Fonts yet.
+      ;; Swap the "" for whatever glyph you find that looks right, OR
+      ;; replace this whole label with an image widget pointing at a real
+      ;; hyprland-logo.png, e.g.:
+      ;;   (image :path "/etc/nixos/home/modules/waybar/assets/hyprland.png"
+      ;;          :image-width 16 :image-height 16)
       (label :class "icon" :text "")
       (label :class "info-label" :text "Hyprland"))))
 
-(defwidget user-section []
-  (box :class "user-section" :orientation "h" :space-evenly false
-    (image :class "pfp" :path "/etc/nixos/home/modules/waybar/assets/pfp.jpg" :image-width 40 :image-height 40)
-    (label :class "username" :text {username})))
+;; ============ RIGHT: album art / title / artist / time / controls ============
+(defwidget media-column []
+  (box :class "media-column" :orientation "v" :space-evenly false :valign "start" :halign "end"
+    ;; Circular album art -- CSS background-image, updates as mpris-data.art changes
+    (box :class "art-box" :style "background-image: url('${mpris-data.art}');")
+    (label :class "title" :text {mpris-data.title} :limit-width 30)
+    (label :class "artist" :text {mpris-data.artist} :limit-width 30)
+    (label :class "timestamp" :text "${mpris-data.position} / ${mpris-data.length}")
+    (box :class "controls" :orientation "h" :halign "center" :space-evenly false :spacing 10
+      (button :class "ctrl-btn" :onclick "playerctl previous"
+        (label :class "ctrl-icon" :text ""))
+      (button :class "ctrl-btn" :onclick "playerctl play-pause"
+        (label :class "ctrl-icon" :text {mpris-data.status == "Playing" ? "" : ""}))
+      (button :class "ctrl-btn" :onclick "playerctl next"
+        (label :class "ctrl-icon" :text "")))))
+
+;; ============ BOTTOM: cava visualizer, left to right ============
+(defwidget cava-row []
+  (box :class "cava-row" :orientation "h" :space-evenly true :spacing 2
+    ;; each entry in cava-data (0-100) becomes one bar's height.
+    ;; the *0.5 multiplier caps bars at ~50px tall -- raise/lower it to taste.
+    (for bar in cava-data
+      (box :class "cava-bar" :style "min-height: ${bar * 0.5}px;"))))
