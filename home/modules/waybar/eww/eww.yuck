@@ -1,0 +1,43 @@
+;; eww/eww.yuck
+
+(defpoll mpris-data :interval "1s" "bash $HOME/.config/eww/scripts/mpris-info.sh")
+(defpoll username :interval "1h" "whoami")
+
+(defwindow mpris-dashboard
+  :monitor 0
+  :geometry (geometry :x "0px" :y "36px" :width "320px" :height "230px" :anchor "top center")
+  :stacking "fg"
+  :layer "top"
+  :exclusive false
+  :focusable "none"
+  (dashboard))
+
+(defwidget dashboard []
+  (box :class "dashboard" :orientation "v" :space-evenly false
+    (mpris-section)
+    (box :class "divider")
+    (sysinfo-section)
+    (box :class "divider")
+    (user-section)))
+
+(defwidget mpris-section []
+  (box :class "mpris-section" :orientation "h" :space-evenly false
+    (image :class "art" :path {mpris-data.art} :image-width 60 :image-height 60)
+    (box :class "mpris-text" :orientation "v" :space-evenly false
+      (label :class "title" :text {mpris-data.title} :limit-width 28 :halign "start")
+      (label :class "artist" :text {mpris-data.artist} :limit-width 28 :halign "start")
+      (label :class "timestamp" :text "${mpris-data.position} / ${mpris-data.length}" :halign "start"))))
+
+(defwidget sysinfo-section []
+  (box :class "sysinfo-section" :orientation "v" :space-evenly false
+    (box :class "info-row" :orientation "h" :space-evenly false
+      (label :class "icon" :text "")
+      (label :class "info-label" :text "NixOS"))
+    (box :class "info-row" :orientation "h" :space-evenly false
+      (label :class "icon" :text "")
+      (label :class "info-label" :text "Hyprland"))))
+
+(defwidget user-section []
+  (box :class "user-section" :orientation "h" :space-evenly false
+    (image :class "pfp" :path "/etc/nixos/home/modules/waybar/assets/pfp.jpg" :image-width 40 :image-height 40)
+    (label :class "username" :text {username})))

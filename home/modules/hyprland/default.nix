@@ -28,6 +28,7 @@
       exec-once = [
         "hyprpaper"
         "nm-applet"
+        "eww daemon"
       ];
 
       # -------------------------------

@@ -1,0 +1,65 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace;
+}
+
+.dashboard {
+  background-color: rgba(40, 30, 60, 0.92);
+  color: #d8c2f0;
+  border-radius: 14px;
+  border: 2px solid #33ccff;
+  padding: 12px;
+}
+
+.divider {
+  min-height: 1px;
+  background-color: rgba(216, 194, 240, 0.2);
+  margin: 8px 0;
+}
+
+.mpris-section {
+  .art {
+    border-radius: 8px;
+    margin-right: 10px;
+  }
+  .title {
+    font-weight: bold;
+    color: #d8c2f0;
+    font-size: 13px;
+  }
+  .artist {
+    color: #c4b5fd;
+    font-size: 12px;
+  }
+  .timestamp {
+    color: #8b5cf6;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+}
+
+.sysinfo-section {
+  .info-row {
+    margin: 3px 0;
+  }
+  .icon {
+    color: #33ccff;
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  .info-label {
+    color: #d8c2f0;
+    font-size: 13px;
+  }
+}
+
+.user-section {
+  .pfp {
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  .username {
+    color: #8b5cf6;
+    font-weight: bold;
+    font-size: 13px;
+  }
+}
