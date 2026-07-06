@@ -178,6 +178,7 @@
     jami
     gimp
     opencode
+    ollama
   ];
 
   #HYPRLAND_SDDM
@@ -286,7 +287,12 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
     xorg.libXScrnSaver
     # Add more if it complains (see below)
   ];
-
+  
+  #Ollama 
+  services.ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
