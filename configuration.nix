@@ -178,7 +178,6 @@
     jami
     gimp
     opencode
-    ytermusic
   ];
 
   #HYPRLAND_SDDM

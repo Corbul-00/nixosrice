@@ -19,7 +19,6 @@
     ./home/modules/yazi/default.nix
     ./home/modules/eza/default.nix
     ./home/modules/termusic/default.nix
-    ./home/modules/ytermusic/default.nix
   ]; 
 
 
