@@ -31,6 +31,9 @@
       # Atalhos
       toggle_hud = "Shift_R+F12";
       toggle_logging = "Shift_L+F2";
+
+      # Evita abrir com
+      no_display = "mpv";
     };
   };
 }
