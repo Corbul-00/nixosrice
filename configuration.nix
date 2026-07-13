@@ -178,6 +178,7 @@
     jami
     gimp
     opencode
+    codex
   ];
 
   #HYPRLAND_SDDM
