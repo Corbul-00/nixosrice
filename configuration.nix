@@ -179,6 +179,7 @@
     gimp
     opencode
     codex
+    openvpn
   ];
 
   #HYPRLAND_SDDM
