@@ -180,6 +180,8 @@
     opencode
     codex
     openvpn
+    gallery-dl
+    imgbrd-grabber
   ];
 
   #HYPRLAND_SDDM
