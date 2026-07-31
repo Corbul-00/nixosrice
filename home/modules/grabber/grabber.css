@@ -1,0 +1,98 @@
+/* Global font + text color — mirrors gtk.css '*' rule */
+QWidget {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 16px;
+    color: #d8c2f0;
+}
+
+/* Main window/dialogs — mirrors gtk.css 'window' rule.
+   No backdrop-filter equivalent in Qt; alpha channel still gives
+   transparency if you add a Hyprland windowrule (see note below). */
+QMainWindow,
+QDialog {
+    background-color: rgba(60, 50, 80, 0.9);
+}
+
+/* Views/lists/tabs/toolbars — mirrors .view/.sidebar/.toolbar/.headerbar */
+QListView,
+QTreeView,
+QTableView,
+QTabWidget::pane,
+QScrollArea,
+QToolBar,
+QStatusBar {
+    background-color: rgba(40, 30, 60, 0.9);
+    color: #d8c2f0;
+    border: none;
+}
+
+QHeaderView::section {
+    background-color: rgba(40, 30, 60, 0.95);
+    color: #d8c2f0;
+    padding: 4px;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* Buttons — mirrors 'button' / 'button:hover' */
+QPushButton {
+    background-color: #8b5cf6;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 10px;
+}
+
+QPushButton:hover {
+    background-color: #a78bfa;
+}
+
+QPushButton:pressed {
+    background-color: #7c3aed;
+}
+
+/* Input fields — mirrors 'entry' rule */
+QLineEdit,
+QTextEdit,
+QPlainTextEdit,
+QSpinBox,
+QComboBox {
+    background-color: rgba(40, 30, 60, 0.95);
+    color: #d8c2f0;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+/* Menus/tooltips — mirrors menu/menuitem/popover/.tooltip block */
+QMenu,
+QMenuBar,
+QToolTip {
+    background-color: rgba(40, 30, 60, 0.95);
+    color: #d8c2f0;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    border-radius: 5px;
+}
+
+QMenuBar::item:selected,
+QMenu::item:selected {
+    background-color: rgba(139, 92, 246, 0.7);
+    color: #ffffff;
+}
+
+/* Extra: scrollbars — gtk.css doesn't style these, but left to Qt
+   defaults they render as native light-grey, which stands out badly
+   against the rest of this theme. */
+QScrollBar:vertical,
+QScrollBar:horizontal {
+    background: rgba(40, 30, 60, 0.7);
+    border: none;
+}
+
+QScrollBar::handle {
+    background: #8b5cf6;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:hover {
+    background: #a78bfa;
+}
