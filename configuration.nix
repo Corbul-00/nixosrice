@@ -194,6 +194,7 @@
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
+    theme = "ltmnight";
   };
   
   xdg.portal = {
@@ -301,12 +302,6 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   # -------------------------------------------------------------
   # SDDM Display Manager Configuration
   # -------------------------------------------------------------
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true; # Set to false if you are on X11
-    package = pkgs.kdePackages.sddm;
-    theme = "ltmnight";
-
     # Qt dependencies required for LTMNight theme
     extraPackages = with pkgs.kdePackages; [
       qtdeclarative
