@@ -8,7 +8,7 @@ pkgs.stdenv.mkDerivation {
     owner = "hyprltm";
     repo = "ltmnight-sddm-theme";
     rev = "main";
-    sha256 = "sha256-to8+o0DgtrwR+pXUQy7+Fk+T3Zh8kKYqI552NAjVz/k="; # Will give hash mismatch on first build
+    sha256 = "sha256-to8+o0DgtrwR+pXUQy7+Fk+T3Zh8kKYqI552NAjVz/k="; 
   };
 
   postInstall = ''
@@ -17,7 +17,7 @@ pkgs.stdenv.mkDerivation {
 
     cat <<EOF > $out/share/sddm/themes/ltmnight/Themes/hyprltm.conf.user
     [General]
-    Background="/home/corbul/sddm-wallpaper/background.jpg"
+    Background="/etc/nixos/modules/sddm/background.jpg"
     PartialBlur="true"
     FormPosition="center"
     HideVirtualKeyboard="true"
