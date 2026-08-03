@@ -310,7 +310,7 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
       qtvirtualkeyboard
       qt5compat
     ];
-  };
+  
 
 
 
