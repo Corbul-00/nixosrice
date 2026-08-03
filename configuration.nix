@@ -302,17 +302,6 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   # -------------------------------------------------------------
   # SDDM Display Manager Configuration
   # -------------------------------------------------------------
-    # Qt dependencies required for LTMNight theme
-    extraPackages = with pkgs.kdePackages; [
-      qtdeclarative
-      qtsvg
-      qtmultimedia
-      qtvirtualkeyboard
-      qt5compat
-    ];
-  
-
-
 
 
 
