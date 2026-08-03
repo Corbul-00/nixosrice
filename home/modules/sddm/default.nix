@@ -1,7 +1,7 @@
+# /etc/nixos/modules/sddm.nix
 { config, pkgs, lib, ... }:
 
 let
-  # 1. Fetch the exact upstream SDDM theme source declaratively
   ltmnight-sddm-theme = pkgs.stdenv.mkDerivation {
     pname = "ltmnight-sddm-theme";
     version = "1.2.0";
@@ -9,23 +9,17 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "hyprltm";
       repo = "ltmnight-sddm-theme";
-      # Pin to a specific git commit / tag for 100% reproducibility
       rev = "main";
-      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; 
-      # TIP: On your first `nixos-rebuild switch`, replace the above hash 
-      # with the actual hash Nix outputs in the error message.
+      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Replace with actual hash upon build
     };
 
-    # Override theme config during build time to point to your user wallpaper
-    # and enable partial background blur
     postInstall = ''
       mkdir -p $out/share/sddm/themes/ltmnight
       cp -r ./* $out/share/sddm/themes/ltmnight/
 
-      # Create user config override
       cat <<EOF > $out/share/sddm/themes/ltmnight/Themes/hyprltm.conf.user
       [General]
-      Background="/home/YOUR_USERNAME/sddm-wallpaper/background.jpg"
+      Background="/home/corbul/sddm-wallpaper/background.jpg"
       PartialBlur="true"
       FormPosition="center"
       HideVirtualKeyboard="true"
@@ -34,16 +28,14 @@ let
   };
 in
 {
-  # 2. Enable SDDM Display Manager (using Qt6 / KDE Packages)
+  # 1. Enable SDDM service
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true; # Set to false if using X11
+    wayland.enable = true; # Change to false if using X11
     package = pkgs.kdePackages.sddm;
-    
-    # Selected theme name matching folder name in derivation
     theme = "ltmnight";
 
-    # Extra dependencies required by Qt Quick / LTMNight theme
+    # Extra dependencies required by Qt Quick / LTMNight
     extraPackages = with pkgs.kdePackages; [
       qtdeclarative
       qtsvg
@@ -53,7 +45,7 @@ in
     ];
   };
 
-  # 3. Add derivation to system environment packages so SDDM can resolve /usr/share/sddm/themes/
+  # 2. Make the theme available to the SDDM daemon
   environment.systemPackages = [
     ltmnight-sddm-theme
   ];
