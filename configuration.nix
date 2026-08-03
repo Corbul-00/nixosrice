@@ -297,7 +297,7 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   #CustomSDDM
   
 
-{
+
   # -------------------------------------------------------------
   # SDDM Display Manager Configuration
   # -------------------------------------------------------------
