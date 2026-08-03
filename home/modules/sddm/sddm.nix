@@ -17,7 +17,7 @@ pkgs.stdenv.mkDerivation {
 
     cat <<EOF > $out/share/sddm/themes/ltmnight/Themes/hyprltm.conf.user
     [General]
-    Background="/etc/nixos/modules/sddm/background.jpg"
+    Background="/etc/nixos/home/modules/sddm/background.jpg"
     PartialBlur="true"
     FormPosition="center"
     HideVirtualKeyboard="true"
