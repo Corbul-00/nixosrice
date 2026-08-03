@@ -183,7 +183,7 @@
     gallery-dl
     imgbrd-grabber
     mpvpaper
-    ltmnight-sddm-theme
+    (import ./modules/sddm.nix { inherit pkgs; })
   ];
 
   #HYPRLAND_SDDM
