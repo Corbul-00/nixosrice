@@ -183,7 +183,7 @@
     gallery-dl
     imgbrd-grabber
     mpvpaper
-    (import ./modules/sddm.nix { inherit pkgs; })
+    (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
   ];
 
   #HYPRLAND_SDDM
