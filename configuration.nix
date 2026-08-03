@@ -183,6 +183,7 @@
     gallery-dl
     imgbrd-grabber
     mpvpaper
+    ltmnight-sddm-theme
   ];
 
   #HYPRLAND_SDDM
@@ -291,7 +292,39 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
     xorg.libXScrnSaver
     # Add more if it complains (see below)
   ];
+ 
+
+  #CustomSDDM
   
+  let
+  # Import the theme package definition from your simple sddm.nix file
+  sddmThemeModule = import ./modules/sddm.nix { inherit pkgs; };
+  ltmnight-sddm-theme = sddmThemeModule.ltmnight-sddm-theme;
+in
+{
+  # -------------------------------------------------------------
+  # SDDM Display Manager Configuration
+  # -------------------------------------------------------------
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true; # Set to false if you are on X11
+    package = pkgs.kdePackages.sddm;
+    theme = "ltmnight";
+
+    # Qt dependencies required for LTMNight theme
+    extraPackages = with pkgs.kdePackages; [
+      qtdeclarative
+      qtsvg
+      qtmultimedia
+      qtvirtualkeyboard
+      qt5compat
+    ];
+  };
+
+
+
+
+
   #Ollama 
 
   # Some programs need SUID wrappers, can be configured further or are
