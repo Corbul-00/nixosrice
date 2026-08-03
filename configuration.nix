@@ -296,11 +296,7 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
 
   #CustomSDDM
   
-  let
-  # Import the theme package definition from your simple sddm.nix file
-  sddmThemeModule = import ./modules/sddm.nix { inherit pkgs; };
-  ltmnight-sddm-theme = sddmThemeModule.ltmnight-sddm-theme;
-in
+
 {
   # -------------------------------------------------------------
   # SDDM Display Manager Configuration
