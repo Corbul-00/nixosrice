@@ -8,7 +8,7 @@ pkgs.stdenv.mkDerivation {
     owner = "hyprltm";
     repo = "ltmnight-sddm-theme";
     rev = "main";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Will give hash mismatch on first build
+    sha256 = "sha256-to8+o0DgtrwR+pXUQy7+Fk+T3Zh8kKYqI552NAjVz/k="; # Will give hash mismatch on first build
   };
 
   postInstall = ''
