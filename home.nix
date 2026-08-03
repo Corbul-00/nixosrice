@@ -20,8 +20,7 @@
     ./home/modules/eza/default.nix
     ./home/modules/termusic/default.nix
     ./home/modules/grabber/default.nix
-    ./home/modules/sddm/default.nix
-  ]; 
+  ];
 
 
   #Cursor

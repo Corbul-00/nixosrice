@@ -1,4 +1,3 @@
-# /etc/nixos/modules/sddm.nix
 { pkgs }:
 
 pkgs.stdenv.mkDerivation {
@@ -9,7 +8,7 @@ pkgs.stdenv.mkDerivation {
     owner = "hyprltm";
     repo = "ltmnight-sddm-theme";
     rev = "main";
-    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+    sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Will give hash mismatch on first build
   };
 
   postInstall = ''
