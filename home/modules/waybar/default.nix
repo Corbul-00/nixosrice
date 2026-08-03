@@ -94,10 +94,10 @@
       #waybar {
         background: rgba(40, 30, 60, 0.88);
         color: #d8c2f0;
-        border-radius: 18px;
+        border-radius: 8px;
         border: 2px solid #33ccff;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-        margin: 4px;
+        margin: 6px 8px 0px 8px;
         transition: border-radius 0.15s ease;
       }
       #workspaces button,
