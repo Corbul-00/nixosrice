@@ -182,6 +182,7 @@
     openvpn
     gallery-dl
     imgbrd-grabber
+    mpvpaper
   ];
 
   #HYPRLAND_SDDM
