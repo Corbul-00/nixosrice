@@ -19,8 +19,7 @@
     ./home/modules/yazi/default.nix
     ./home/modules/eza/default.nix
     ./home/modules/termusic/default.nix
-    ./home/modules/grabber/default.nix
-    ./home/modules/sddm/default.nix
+    ./home/modules/grabber/default.nix 
   ]; 
 
 
