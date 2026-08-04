@@ -184,6 +184,8 @@
     imgbrd-grabber
     mpvpaper
     (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
+    qemu
+    OVMF
   ];
 
   #HYPRLAND_SDDM
