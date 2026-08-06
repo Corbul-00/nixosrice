@@ -10,5 +10,6 @@
     ./lockscreen.nix
     ./fastfetch.nix
     ./wired.nix
+    ./wallpaper.nix
   ];
 }

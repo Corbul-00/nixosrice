@@ -1,18 +1,9 @@
 { pkgs, hyprlain, ... }:
 
-{
-  # Keep Hyprlain's media in its pinned Nix store source. Home Manager creates
-  # a managed symlink; no installer writes into the real ~/.config directory.
-  xdg.configFile."assets" = {
-    source = "${hyprlain}/src/hyprland/src/assets";
-    recursive = true;
-  };
-
-  # The upstream CSS intentionally resolves ../assets from ~/.config/wlogout.
-  xdg.configFile."wlogout/style.css".source =
-    "${hyprlain}/src/hyprland/src/wlogout/style.css";
-
-  xdg.configFile."wlogout/layout".text = builtins.toJSON [
+let
+  # Wlogout 1.2.x does not accept a JSON array here. Its parser expects a
+  # sequence of standalone JSON objects, matching the upstream layout format.
+  wlogoutButtons = [
     {
       label = "lock";
       action = "hyprlock";
@@ -27,13 +18,13 @@
     }
     {
       label = "suspend";
-      action = "systemctl suspend";
+      action = "sh -c 'hyprlock & sleep 1; systemctl suspend'";
       text = "Suspend";
       keybind = "u";
     }
     {
       label = "hibernate";
-      action = "systemctl hibernate";
+      action = "sh -c 'hyprlock & sleep 1; systemctl hibernate'";
       text = "Hibernate";
       keybind = "h";
     }
@@ -50,6 +41,21 @@
       keybind = "r";
     }
   ];
+in
+{
+  # Keep Hyprlain's media in its pinned Nix store source. Home Manager creates
+  # a managed symlink; no installer writes into the real ~/.config directory.
+  xdg.configFile."assets" = {
+    source = "${hyprlain}/src/hyprland/src/assets";
+    recursive = true;
+  };
+
+  # The upstream CSS intentionally resolves ../assets from ~/.config/wlogout.
+  xdg.configFile."wlogout/style.css".source =
+    "${hyprlain}/src/hyprland/src/wlogout/style.css";
+
+  xdg.configFile."wlogout/layout".text =
+    pkgs.lib.concatMapStringsSep "\n" builtins.toJSON wlogoutButtons;
 
   home.packages = with pkgs; [
     swww
