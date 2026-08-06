@@ -11,5 +11,6 @@
     ./fastfetch.nix
     ./wired.nix
     ./wallpaper.nix
+    ./yazi.nix
   ];
 }
