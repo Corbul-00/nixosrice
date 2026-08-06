@@ -39,6 +39,23 @@
         "type": "github"
       }
     },
+    "hyprlain": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778941039,
+        "narHash": "sha256-4LP01p2EbIf0in1qQzFMhjZzkuhosuRX4Rif98u7Dx4=",
+        "owner": "Ascaniolamp",
+        "repo": "Hyprlain",
+        "rev": "ffb81b75911562085ca802e9f4e66cab4bb6e872",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Ascaniolamp",
+        "repo": "Hyprlain",
+        "rev": "ffb81b75911562085ca802e9f4e66cab4bb6e872",
+        "type": "github"
+      }
+    },
     "lazyvim-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -92,6 +109,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "hyprlain": "hyprlain",
         "lazyvim-nix": "lazyvim-nix",
         "nixpkgs": "nixpkgs_2"
       }
