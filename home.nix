@@ -12,7 +12,7 @@
     ./home/themes/hyprlain.nix
 
     ./home/modules/fish/default.nix
-    ./home/modules/fastfetch/default.nix
+    #./home/modules/fastfetch/default.nix
     ./home/modules/btop/default.nix
     ./home/modules/librewolf/default.nix
     ./home/modules/lazyvim/default.nix

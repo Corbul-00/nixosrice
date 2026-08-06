@@ -8,5 +8,7 @@
     ./rofi.nix
     ./dunst.nix
     ./lockscreen.nix
+    ./fastfetch.nix
+    ./wired.nix
   ];
 }
