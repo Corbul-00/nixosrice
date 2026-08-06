@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = [ pkgs.rofi-wayland ];
+  home.packages = [ pkgs.rofi ];
 
   # A repaired, self-contained version of the upstream Rofi appearance. It
   # avoids optional Arch plugins (rofi-calc/rofi-emoji), so drun is reliable.
