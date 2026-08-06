@@ -1,5 +1,31 @@
 { pkgs, hyprlain, ... }:
 
+let
+  hyprlainPower = pkgs.writeShellApplication {
+    name = "hyprlain-power";
+    runtimeInputs = [ pkgs.wlogout ];
+    text = ''
+      layout="$HOME/.config/wlogout/layout"
+      style="$HOME/.config/wlogout/style.css"
+
+      if ! wlogout \
+        --protocol layer-shell \
+        --layout "$layout" \
+        --css "$style" \
+        --buttons-per-row 6 \
+        --margin 40 \
+        --show-binds; then
+        exec wlogout \
+          --protocol xdg \
+          --layout "$layout" \
+          --css "$style" \
+          --buttons-per-row 6 \
+          --margin 40 \
+          --show-binds
+      fi
+    '';
+  };
+in
 {
   programs.waybar = {
     enable = true;
@@ -120,7 +146,7 @@
         "custom/power" = {
           format = " ";
           tooltip = false;
-          "on-click" = "wlogout";
+          "on-click" = "${hyprlainPower}/bin/hyprlain-power";
         };
       }
     ];
@@ -133,5 +159,6 @@
   home.packages = with pkgs; [
     font-awesome_6
     nerd-fonts.adwaita-mono
+    hyprlainPower
   ];
 }

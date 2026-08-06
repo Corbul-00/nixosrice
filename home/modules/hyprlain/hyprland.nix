@@ -18,7 +18,7 @@
 
       exec-once = [
         "swww-daemon"
-        "swww img $HOME/.config/assets/media/anim/bg_dark_anim_0_08.gif"
+        "hyprlain-wallpapers --restore"
         "nm-applet"
         "eww daemon"
       ];
@@ -188,6 +188,7 @@
         "$mainMod CTRL, PRINT, exec, hyprshot -m window --clipboard-only"
         "$mainMod ALT, PRINT, exec, hyprshot -m region --freeze"
         "$mainMod, W, exec, waypaper"
+        "$mainMod SHIFT, W, exec, hyprlain-wallpapers"
       ];
 
       bindm = [
