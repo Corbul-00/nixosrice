@@ -13,7 +13,7 @@
     };
   };
    
-  outputs = { self, nixpkgs, home-manager, lazyvim-nix, ... }:
+  outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, ... }:
   let
     system = "86_64-linux";
     in {
