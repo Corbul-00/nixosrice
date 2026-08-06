@@ -6,11 +6,12 @@
   
  
   imports = [
-    ./home/modules/kitty/default.nix
-    ./home/modules/hyprland/default.nix
-    ./home/modules/waybar/default.nix
+     # Select exactly ONE complete visual profile here.
+    # ./home/themes/default.nix
+    # ./home/themes/pink.nix
+    ./home/themes/hyprlain.nix
+
     ./home/modules/fish/default.nix
-    ./home/modules/gtk/default.nix # Comment: Added global GTK theme configuration.
     ./home/modules/fastfetch/default.nix
     ./home/modules/btop/default.nix
     ./home/modules/librewolf/default.nix
@@ -19,7 +20,7 @@
     ./home/modules/yazi/default.nix
     ./home/modules/eza/default.nix
     ./home/modules/termusic/default.nix
-    ./home/modules/grabber/default.nix
+    ./home/modules/grabber/default.nix 
   ];
 
 

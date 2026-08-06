@@ -1,0 +1,8 @@
+{
+  imports = [
+    ../modules/hyprland/default.nix
+    ../modules/waybar/default.nix
+    ../modules/kitty/default.nix
+    ../modules/gtk/default.nix
+  ];
+}
