@@ -7,6 +7,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lazyvim-nix.url = "github:pfassina/lazyvim-nix";  # <-- ADD THIS
+    hyprlain = {
+      url = "github:Ascaniolamp/Hyprlain/ffb81b75911562085ca802e9f4e66cab4bb6e872";
+      flake = false;
+    };
   };
    
   outputs = { self, nixpkgs, home-manager, lazyvim-nix, ... }:
@@ -23,7 +27,7 @@
 	   home-manager.useUserPackages = true; 
 	   home-manager.users.corbul = import ./home.nix;
 	   home-manager.backupFileExtension = "backup";
-	   home-manager.extraSpecialArgs = { inherit lazyvim-nix; };  #Add in home
+	   home-manager.extraSpecialArgs = { inherit lazyvim-nix hyprlain; };  #Add in home
 	  }
         ]; 
      };
