@@ -11,16 +11,16 @@ let
   textLight    = "#f0e6ff";
 in
 {
-  # Directory structure
+  # Just make sure the folders exist
   home.file."Stash/.keep".text = "";
   home.file."Stash/background/.keep".text = "";
 
-  # Optional: manage the background image
+  # Optional: manage the background image itself
   # home.file."Stash/background/background.png".source = ./background.png;
 
-  # 1. The CSS file (this is the important part)
+  # Only manage the CSS (this file can be read-only)
   home.file."Stash/custom.css".text = ''
-    /* Dark purple + pink theme */
+    /* Dark purple + pink theme for Stash */
     body {
       background-color: ${purpleDark} !important;
       background-image: url("/custom/background.png");
@@ -73,21 +73,5 @@ in
       color: ${textLight} !important;
       border-color: ${purpleAccent} !important;
     }
-  '';
-
-  # 2. Minimal config.yml – only the keys we need to manage
-  home.file."Stash/config.yml".text = ''
-    # Managed by Home Manager
-    cssenabled: true
-
-    custom_served_folders:
-      "/": ${stashDir}/background
-
-    theme_color: "${purpleDark}"
-
-    # -------------------------------------------------
-    # Paste the REST of your original config.yml below
-    # (database, stash paths, etc.)
-    # -------------------------------------------------
   '';
 }
