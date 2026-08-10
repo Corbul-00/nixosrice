@@ -135,6 +135,7 @@
         "$mainMod, R, exec, $menu"
         "$mainMod, P, pseudo"
         "$mainMod, D, togglesplit"
+        "$mainMod SHIFT, P, exec, wlogout"
 
         "$mainMod, left, movefocus, l"
         "$mainMod, right, movefocus, r"
