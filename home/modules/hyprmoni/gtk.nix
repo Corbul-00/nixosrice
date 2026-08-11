@@ -103,7 +103,7 @@ in
 
     font = {
       name = "Mali";
-      size = 14;
+      size = 13;
       package = ddlcFonts;
     };
 

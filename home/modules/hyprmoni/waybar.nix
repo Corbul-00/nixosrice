@@ -149,7 +149,7 @@ in
     style = ''
       * {
         font-family: "Mali", "AdwaitaMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
         min-height: 0;
         border-radius: 0;
