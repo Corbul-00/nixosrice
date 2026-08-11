@@ -3,6 +3,22 @@
 let
   assets = toString ./assets;
 
+  # GTK/Wlogout can fail to discover the SVG pixbuf loader on NixOS,
+  # depending on how the menu is launched. Keep the SVGs as theme sources,
+  # but render deterministic PNGs into the Nix store for Wlogout itself.
+  wlogoutIcons = pkgs.runCommand "hyprmoni-wlogout-icons" {
+    nativeBuildInputs = [ pkgs.librsvg ];
+  } ''
+    mkdir -p "$out"
+    for icon in lock logout suspend hibernate reboot shutdown; do
+      rsvg-convert \
+        --width 128 \
+        --height 128 \
+        "${assets}/wlogout/$icon.svg" \
+        --output "$out/$icon.png"
+    done
+  '';
+
   buttons = [
     {
       label = "lock";
@@ -96,27 +112,27 @@ in
     }
 
     #lock {
-      background-image: url("${assets}/wlogout/lock.svg");
+      background-image: image(url("${wlogoutIcons}/lock.png"));
     }
 
     #logout {
-      background-image: url("${assets}/wlogout/logout.svg");
+      background-image: image(url("${wlogoutIcons}/logout.png"));
     }
 
     #suspend {
-      background-image: url("${assets}/wlogout/suspend.svg");
+      background-image: image(url("${wlogoutIcons}/suspend.png"));
     }
 
     #hibernate {
-      background-image: url("${assets}/wlogout/hibernate.svg");
+      background-image: image(url("${wlogoutIcons}/hibernate.png"));
     }
 
     #reboot {
-      background-image: url("${assets}/wlogout/reboot.svg");
+      background-image: image(url("${wlogoutIcons}/reboot.png"));
     }
 
     #shutdown {
-      background-image: url("${assets}/wlogout/shutdown.svg");
+      background-image: image(url("${wlogoutIcons}/shutdown.png"));
     }
 
     button:focus,
