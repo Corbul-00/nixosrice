@@ -28,13 +28,13 @@
 
   #Cursor
 
-  home.pointerCursor = {
-  name = "Frieren"; # Tem que bater com o nome da pasta (mkdir) criada acima
-  package = pkgs.callPackage ./home/modules/frieren/default.nix {};
-  size = 24;
-  gtk.enable = true;
-  x11.enable = true;
-  };
+  #home.pointerCursor = {
+  #name = "Frieren"; # Tem que bater com o nome da pasta (mkdir) criada acima
+  #package = pkgs.callPackage ./home/modules/frieren/default.nix {};
+  #size = 24;
+  #gtk.enable = true;
+  #x11.enable = true;
+  #};
 
 
   #Basic Neovim

@@ -5,5 +5,6 @@
     ../modules/kitty/pink.nix
     ../modules/gtk/pink.nix
     ../modules/fastfetch/pink.nix
+    ../modules/frieren/cursor.nix
   ];
 }
