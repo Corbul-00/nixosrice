@@ -9,7 +9,8 @@
      # Select exactly ONE complete visual profile here.
     # ./home/themes/default.nix
     # ./home/themes/pink.nix
-    ./home/themes/hyprlain.nix
+    ./home/themes/hyprmoni.nix
+    # ./home/themes/hyprlain.nix
 
     ./home/modules/fish/default.nix
     #./home/modules/fastfetch/default.nix

@@ -1,0 +1,17 @@
+{
+  imports = [
+    ./assets.nix
+    ./fonts.nix
+    ./hyprland.nix
+    ./waybar.nix
+    ./kitty.nix
+    ./gtk.nix
+    ./rofi.nix
+    ./dunst.nix
+    ./hyprlock.nix
+    ./wlogout.nix
+    ./fastfetch.nix
+    ./wallpaper.nix
+    ./yazi.nix
+  ];
+}
