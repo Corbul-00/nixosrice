@@ -41,7 +41,7 @@ in
     enable = true;
     name = "Just-Monika";
     package = monikaCursor;
-    size = 24;
+    size = 28;
     gtk.enable = true;
     x11.enable = true;
   };

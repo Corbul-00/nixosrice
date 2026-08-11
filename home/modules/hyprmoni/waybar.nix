@@ -139,7 +139,7 @@ in
         };
 
         tray = {
-          "icon-size" = 17;
+          "icon-size" = 19;
           "show-passive-items" = true;
           spacing = 5;
         };
@@ -149,7 +149,7 @@ in
     style = ''
       * {
         font-family: "Mali", "AdwaitaMono Nerd Font", "Font Awesome 6 Free", sans-serif;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
         min-height: 0;
         border-radius: 0;
