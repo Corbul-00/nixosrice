@@ -1,41 +1,43 @@
 { pkgs, ... }:
 
 let
+  assets = toString ./assets;
+
   buttons = [
     {
       label = "lock";
       action = "hyprlock";
-      text = "  Lock";
+      text = "Lock";
       keybind = "l";
     }
     {
       label = "logout";
       action = "hyprctl dispatch exit";
-      text = "󰍃  Logout";
+      text = "Logout";
       keybind = "e";
     }
     {
       label = "suspend";
       action = "sh -c 'hyprlock & sleep 1; systemctl suspend'";
-      text = "󰤄  Suspend";
+      text = "Suspend";
       keybind = "u";
     }
     {
       label = "hibernate";
       action = "sh -c 'hyprlock & sleep 1; systemctl hibernate'";
-      text = "󰒲  Hibernate";
+      text = "Hibernate";
       keybind = "h";
     }
     {
       label = "reboot";
       action = "systemctl reboot";
-      text = "󰜉  Reboot";
+      text = "Reboot";
       keybind = "r";
     }
     {
       label = "shutdown";
       action = "systemctl poweroff";
-      text = "  Shutdown";
+      text = "Shutdown";
       keybind = "s";
     }
   ];
@@ -84,9 +86,37 @@ in
     button {
       color: #FFD9E8;
       background-color: rgba(27, 27, 27, 0.94);
+      background-repeat: no-repeat;
+      background-position: center 35%;
+      background-size: 88px 88px;
       border: 2px solid #67253F;
       border-radius: 0;
       margin: 8px;
+      padding-top: 110px;
+    }
+
+    #lock {
+      background-image: url("${assets}/wlogout/lock.svg");
+    }
+
+    #logout {
+      background-image: url("${assets}/wlogout/logout.svg");
+    }
+
+    #suspend {
+      background-image: url("${assets}/wlogout/suspend.svg");
+    }
+
+    #hibernate {
+      background-image: url("${assets}/wlogout/hibernate.svg");
+    }
+
+    #reboot {
+      background-image: url("${assets}/wlogout/reboot.svg");
+    }
+
+    #shutdown {
+      background-image: url("${assets}/wlogout/shutdown.svg");
     }
 
     button:focus,
