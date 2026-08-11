@@ -18,11 +18,12 @@ in
           {
             type = "kitty-direct";
             source = customImage;
-            width = 36;
-            height = 18;
+            # Match the image height to the ten-row system-information block.
+            width = 20;
+            height = 10;
             padding = {
               top = 1;
-              right = 5;
+              right = 4;
             };
           }
         else
