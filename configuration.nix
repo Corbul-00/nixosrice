@@ -161,6 +161,7 @@
     protonvpn-gui
     (import ./home/modules/hashdating/default.nix { inherit pkgs; })
     (import ./home/modules/mybsc/default.nix { inherit pkgs; })
+    (import ./home/modules/justmonika/default.nix { inherit pkgs; })
     kdePackages.gwenview
     stash
     librewolf
