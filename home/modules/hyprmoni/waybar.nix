@@ -122,9 +122,10 @@ in
 
         "custom/eye" = {
           format = "󰈈";
-          tooltip = true;
-          "tooltip-format" = "Reveal tray • right-click: all open windows";
-          "on-click-right" = "rofi -show window";
+          # Keep this module event-free. A child click handler intercepts the
+          # group drawer event and prevents the interactive tray from opening.
+          # The parent drawer now owns the click exactly like Hyprlain does.
+          tooltip = false;
         };
 
         cpu = {
