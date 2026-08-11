@@ -1,22 +1,69 @@
 { pkgs, ... }:
 
 let
-  assets = toString ./assets;
+  # Keep the vectors self-contained in this module. This guarantees that the
+  # icon derivation has explicit store inputs even if a flake source snapshot
+  # omits the optional assets directory.
+  iconSources = {
+    lock = pkgs.writeText "hyprmoni-wlogout-lock.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#67253F" stroke-width="13"><path d="M40 57V43a24 24 0 0 1 48 0v14"/><rect x="27" y="56" width="74" height="56" rx="6"/><path d="M64 78v13"/></g>
+          <g stroke="#FFD9E8" stroke-width="7"><path d="M40 57V43a24 24 0 0 1 48 0v14"/><rect x="27" y="56" width="74" height="56" rx="6"/><path d="M64 78v13"/></g>
+        </g>
+      </svg>
+    '';
+    logout = pkgs.writeText "hyprmoni-wlogout-logout.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#67253F" stroke-width="13"><path d="M70 23H31v82h39"/><path d="M54 64h53M89 46l18 18-18 18"/></g>
+          <g stroke="#FFD9E8" stroke-width="7"><path d="M70 23H31v82h39"/><path d="M54 64h53M89 46l18 18-18 18"/></g>
+        </g>
+      </svg>
+    '';
+    suspend = pkgs.writeText "hyprmoni-wlogout-suspend.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <path d="M91 91A43 43 0 0 1 51 22a45 45 0 1 0 40 69Z" fill="#FFD9E8" stroke="#67253F" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    '';
+    hibernate = pkgs.writeText "hyprmoni-wlogout-hibernate.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#67253F" stroke-width="13"><path d="M64 20v88M26 42l76 44M26 86l76-44"/><path d="m64 20-10 11M64 20l10 11M64 108l-10-11M64 108l10-11"/><path d="m26 42 15 2M26 42l6 14M102 86l-15-2M102 86l-6-14"/><path d="m26 86 6-14M26 86l15-2M102 42l-6 14M102 42l-15 2"/></g>
+          <g stroke="#FFD9E8" stroke-width="7"><path d="M64 20v88M26 42l76 44M26 86l76-44"/><path d="m64 20-10 11M64 20l10 11M64 108l-10-11M64 108l10-11"/><path d="m26 42 15 2M26 42l6 14M102 86l-15-2M102 86l-6-14"/><path d="m26 86 6-14M26 86l15-2M102 42l-6 14M102 42l-15 2"/></g>
+        </g>
+      </svg>
+    '';
+    reboot = pkgs.writeText "hyprmoni-wlogout-reboot.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#67253F" stroke-width="13"><path d="M99 51A41 41 0 1 0 101 82"/><path d="M99 51V27H75"/></g>
+          <g stroke="#FFD9E8" stroke-width="7"><path d="M99 51A41 41 0 1 0 101 82"/><path d="M99 51V27H75"/></g>
+        </g>
+      </svg>
+    '';
+    shutdown = pkgs.writeText "hyprmoni-wlogout-shutdown.svg" ''
+      <svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#67253F" stroke-width="13"><path d="M64 18v47"/><path d="M42 34a43 43 0 1 0 44 0"/></g>
+          <g stroke="#FFD9E8" stroke-width="7"><path d="M64 18v47"/><path d="M42 34a43 43 0 1 0 44 0"/></g>
+        </g>
+      </svg>
+    '';
+  };
 
-  # GTK/Wlogout can fail to discover the SVG pixbuf loader on NixOS,
-  # depending on how the menu is launched. Keep the SVGs as theme sources,
-  # but render deterministic PNGs into the Nix store for Wlogout itself.
+  # Render deterministic PNGs because GTK/Wlogout may not discover the SVG
+  # pixbuf loader when launched from Hyprland on NixOS.
   wlogoutIcons = pkgs.runCommand "hyprmoni-wlogout-icons" {
     nativeBuildInputs = [ pkgs.librsvg ];
   } ''
     mkdir -p "$out"
-    for icon in lock logout suspend hibernate reboot shutdown; do
-      rsvg-convert \
-        --width 128 \
-        --height 128 \
-        "${assets}/wlogout/$icon.svg" \
-        --output "$out/$icon.png"
-    done
+    rsvg-convert --width 128 --height 128 "${iconSources.lock}" --output "$out/lock.png"
+    rsvg-convert --width 128 --height 128 "${iconSources.logout}" --output "$out/logout.png"
+    rsvg-convert --width 128 --height 128 "${iconSources.suspend}" --output "$out/suspend.png"
+    rsvg-convert --width 128 --height 128 "${iconSources.hibernate}" --output "$out/hibernate.png"
+    rsvg-convert --width 128 --height 128 "${iconSources.reboot}" --output "$out/reboot.png"
+    rsvg-convert --width 128 --height 128 "${iconSources.shutdown}" --output "$out/shutdown.png"
   '';
 
   buttons = [
