@@ -54,7 +54,7 @@ in
         };
 
         pulseaudio = {
-          format = "{icon} {volume}%";
+          format = "{icon}  {volume}%";
           "format-bluetooth" = " {icon} {volume}%";
           "format-muted" = "󰝟 muted";
           "format-icons" = {
@@ -129,12 +129,12 @@ in
         };
 
         cpu = {
-          format = " {usage}%";
+          format = "  {usage}%";
           "tooltip-format" = "CPU: {usage}%";
         };
 
         memory = {
-          format = " {percentage}%";
+          format = "  {percentage}%";
           "tooltip-format" = "RAM: {used:0.1f}/{total:0.1f} GiB";
         };
 
