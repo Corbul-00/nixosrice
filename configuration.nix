@@ -187,7 +187,6 @@
     (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
     qemu
     OVMF
-    jellyfin
   ];
 
   #HYPRLAND_SDDM
@@ -308,19 +307,6 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   ];
  
 
-  #Jellyfin
-  
-
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;   # opens port 8096
-  };
-  
-  users.users.jellyfin.extraGroups = [ "users" ];
-
-
-
-  
 
   #Ollama 
 
