@@ -187,6 +187,7 @@
     (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
     qemu
     OVMF
+    pkgs.tailscale
   ];
 
   #HYPRLAND_SDDM
@@ -307,15 +308,18 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   ];
  
 
-  #CustomSDDM
+  #Tailscale & firewall
+
+
+  services.tailscale.enable = true;
+
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = [ "tailscale0" ];      # trust everything from Tailscale
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+ 
   
-
-
-  # -------------------------------------------------------------
-  # SDDM Display Manager Configuration
-  # -------------------------------------------------------------
-
-
 
   #Ollama 
 
