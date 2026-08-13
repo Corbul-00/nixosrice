@@ -187,7 +187,7 @@
     (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
     qemu
     OVMF
-    pkgs.tailscale
+    jellyfin
   ];
 
   #HYPRLAND_SDDM
@@ -308,17 +308,18 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   ];
  
 
-  #Tailscale & firewall
+  #Jellyfin
+  
 
-
-  services.tailscale.enable = true;
-
-  networking.firewall = {
+  services.jellyfin = {
     enable = true;
-    trustedInterfaces = [ "tailscale0" ];      # trust everything from Tailscale
-    allowedUDPPorts = [ config.services.tailscale.port ];
+    openFirewall = true;   # opens port 8096
   };
- 
+  
+  users.users.jellyfin.extraGroups = [ "users" ];
+
+
+
   
 
   #Ollama 
