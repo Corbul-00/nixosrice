@@ -4,13 +4,9 @@ let
   doomPrivateDir = pkgs.linkFarm "monidoom-private" [
     {
       name = "init.el";
-      path = pkgs.writeText "monidoom-init.el" ''
+      path = pkgs.writeText "init.el" ''
         (doom!
-         :input
-         ;; bzzzt
-
          :completion
-         (corfu +orderless)
          vertico
 
          :ui
@@ -23,18 +19,11 @@ let
          :editor
          (evil +everywhere)
          snippets
-         format
 
          :emacs
          dired
          undo
          vc
-
-         :term
-         eshell
-
-         :checkers
-         syntax
 
          :tools
          magit
@@ -44,59 +33,52 @@ let
          nix +lsp
          python +lsp
          rust +lsp
-         javascript +lsp))
+         javascript +lsp)
       '';
     }
 
     {
       name = "packages.el";
-      path = pkgs.writeText "monidoom-packages.el" ''
-        ;; Keep this empty.
-        ;; Doom modules provide the functionality we want.
+      path = pkgs.writeText "packages.el" ''
+        ;; MoniDoom uses Doom's built-in modules.
       '';
     }
 
     {
       name = "config.el";
-      path = pkgs.writeText "monidoom-config.el" ''
+      path = pkgs.writeText "config.el" ''
+        ;;; MoniDoom configuration
+
         ;; ─────────────────────────────────────────────
-        ;; MoniDoom
+        ;; Appearance
         ;; ─────────────────────────────────────────────
 
-        ;; Theme
         (setq doom-theme 'doom-one)
 
-        ;; Font
         (setq doom-font
               (font-spec
                :family "JetBrainsMono Nerd Font"
                :size 12))
 
-        ;; Vim-style relative line numbers
         (setq display-line-numbers-type 'relative)
 
-        ;; Leader keys remain Doom/Evil defaults:
-        ;; SPC       = leader
-        ;; SPC m     = local leader
-
         ;; ─────────────────────────────────────────────
-        ;; Transparency
+        ;; MoniDoom dashboard
         ;; ─────────────────────────────────────────────
 
-        (when (display-graphic-p)
-          (add-to-list 'default-frame-alist '(alpha-background . 92)))
-
-        ;; ─────────────────────────────────────────────
-        ;; LazyVim-style dashboard
-        ;; ─────────────────────────────────────────────
-
+        ;; Image supplied by the Hyprmoni theme.
         (setq +doom-dashboard-banner-file
-              "${doomPrivateDir}/emacsbg.png")
+              "/etc/nixos/home/modules/hyprmoni/assets/emacsbg.png")
 
         (setq +doom-dashboard-banner-padding '(0 . 2))
 
-        (setq +doom-dashboard-name "*monivim*")
+        ;; Keep the dashboard compact like LazyVim.
+        (setq +doom-dashboard-functions
+              '(doom-dashboard-widget-banner
+                doom-dashboard-widget-shortmenu
+                doom-dashboard-widget-loaded))
 
+        ;; LazyVim-inspired menu, but using Doom/Emacs actions.
         (setq +doom-dashboard-menu-sections
               '(("Find File"
                  :icon ""
@@ -116,7 +98,7 @@ let
                 ("Find Text"
                  :icon "󰱼"
                  :key "g"
-                 :action consult-ripgrep)
+                 :action projectile-ripgrep)
 
                 ("Recent Files"
                  :icon ""
@@ -128,22 +110,6 @@ let
                  :key "c"
                  :action doom/open-private-config)
 
-                ("Restore Session"
-                 :icon "󰁯"
-                 :key "s"
-                 :when (fboundp 'doom/quickload-session)
-                 :action doom/quickload-session)
-
-                ("Lazy Extras"
-                 :icon "󰏗"
-                 :key "x"
-                 :action doom/describe-modules)
-
-                ("Lazy"
-                 :icon "󰒲"
-                 :key "l"
-                 :action doom/sync)
-
                 ("Quit"
                  :icon "󰅗"
                  :key "q"
@@ -154,7 +120,7 @@ let
         ;; ─────────────────────────────────────────────
 
         (custom-set-faces!
-          ;; Main editor
+          ;; Editor
           '(default
              :background "#0D0D0D"
              :foreground "#FFD9E8")
@@ -165,6 +131,7 @@ let
           '(fringe
              :background "#0D0D0D")
 
+          ;; Line numbers
           '(line-number
              :foreground "#67253F"
              :background "#0D0D0D")
@@ -174,7 +141,6 @@ let
              :background "#1B1B1B"
              :weight bold)
 
-          ;; Current line
           '(hl-line
              :background "#1B1B1B")
 
@@ -193,46 +159,35 @@ let
              :background "#67253F"
              :foreground "#FFD9E8")
 
-          ;; Comments
+          ;; Syntax
           '(font-lock-comment-face
              :foreground "#BFBFBF"
              :slant italic)
 
-          ;; Strings
           '(font-lock-string-face
              :foreground "#FFAA99")
 
-          ;; Keywords
           '(font-lock-keyword-face
              :foreground "#CE4A7E"
              :weight bold)
 
-          ;; Functions
           '(font-lock-function-name-face
              :foreground "#FD5BA2"
              :weight bold)
 
-          ;; Types
           '(font-lock-type-face
              :foreground "#FFD9E8")
 
-          ;; Constants
           '(font-lock-constant-face
              :foreground "#FFAA99")
 
-          ;; Variables
           '(font-lock-variable-name-face
              :foreground "#FFD9E8")
 
-          ;; Builtins
           '(font-lock-builtin-face
              :foreground "#FD5BA2")
 
-          ;; Operators / punctuation
-          '(font-lock-negation-char-face
-             :foreground "#FFAA99")
-
-          ;; Mode line
+          ;; Modeline
           '(mode-line
              :background "#1B1B1B"
              :foreground "#FFD9E8"
@@ -249,16 +204,6 @@ let
              :weight bold)
 
           ;; Completion
-          '(corfu-default
-             :background "#1B1B1B"
-             :foreground "#FFD9E8")
-
-          '(corfu-current
-             :background "#401929"
-             :foreground "#FFD9E8"
-             :weight bold)
-
-          ;; Vertico
           '(vertico-current
              :background "#401929"
              :foreground "#FFD9E8"
@@ -275,10 +220,6 @@ let
           '(which-key-command-description-face
              :foreground "#FFD9E8")
 
-          ;; LSP
-          '(lsp-face-highlight-textual
-             :background "#401929")
-
           ;; Diagnostics
           '(flycheck-error
              :foreground "#FD5BA2"
@@ -294,15 +235,12 @@ let
 
           ;; Git
           '(diff-added
-             :background "#23312A"
              :foreground "#CE4A7E")
 
           '(diff-removed
-             :background "#401929"
              :foreground "#FD5BA2")
 
           '(diff-changed
-             :background "#401929"
              :foreground "#FFAA99")
 
           ;; Dashboard
@@ -310,8 +248,7 @@ let
              :foreground "#FD5BA2")
 
           '(doom-dashboard-menu-title
-             :foreground "#FFD9E8"
-             :weight normal)
+             :foreground "#FFD9E8")
 
           '(doom-dashboard-menu-desc
              :foreground "#FFAA99")
@@ -323,48 +260,37 @@ let
           '(doom-dashboard-footer
              :foreground "#BFBFBF")
 
-          ;; Popup / borders
-          '(window-divider
+          ;; Borders
+          '(vertical-border
              :foreground "#67253F")
 
-          '(vertical-border
+          '(window-divider
              :foreground "#67253F"))
 
         ;; ─────────────────────────────────────────────
-        ;; Hyprmoni dashboard spacing
-        ;; ─────────────────────────────────────────────
-
-        (after! doom-dashboard
-          (setq +doom-dashboard-banner-padding '(0 . 2)))
-
-        ;; Keep the dashboard clean
-        (setq +doom-dashboard-functions
-              '(doom-dashboard-widget-banner
-                doom-dashboard-widget-shortmenu
-                doom-dashboard-widget-loaded))
-
-        ;; ─────────────────────────────────────────────
-        ;; Better Evil cursor colors
+        ;; Evil
         ;; ─────────────────────────────────────────────
 
         (after! evil
-          (setq evil-normal-state-cursor '(box "#FD5BA2")
-                evil-insert-state-cursor '(bar "#FD5BA2")
-                evil-visual-state-cursor '(hollow "#FD5BA2")
-                evil-replace-state-cursor '(hbar "#FD5BA2")))
+          (setq evil-normal-state-cursor
+                '(box "#FD5BA2")
+
+                evil-insert-state-cursor
+                '(bar "#FD5BA2")
+
+                evil-visual-state-cursor
+                '(hollow "#FD5BA2")
+
+                evil-replace-state-cursor
+                '(hbar "#FD5BA2")))
 
         ;; ─────────────────────────────────────────────
-        ;; Disable unnecessary startup clutter
+        ;; Clean startup
         ;; ─────────────────────────────────────────────
 
         (setq inhibit-startup-screen t
               confirm-kill-emacs nil)
       '';
-    }
-
-    {
-      name = "emacsbg.png";
-      path = ./assets/emacsbg.png;
     }
   ];
 in
@@ -375,7 +301,10 @@ in
 
   programs.doom-emacs = {
     enable = true;
-    emacsPackage = pkgs.emacs;
+
+    # Native Wayland/PGTK Emacs for Hyprland.
+    emacsPackage = pkgs.emacs-pgtk;
+
     doomPrivateDir = doomPrivateDir;
   };
 
