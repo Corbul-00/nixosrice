@@ -1,8 +1,8 @@
-{ pkgs, inputs, ... }:
+{ pkgs, nix-doom-emacs-unstraightened, ... }:
 
 {
   imports = [
-    inputs.nix-doom-emacs-unstraightened.homeModule
+    nix-doom-emacs-unstraightened.homeModule
   ];
 
   programs.doom-emacs = {
