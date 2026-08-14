@@ -11,7 +11,7 @@
       url = "github:Ascaniolamp/Hyprlain/ffb81b75911562085ca802e9f4e66cab4bb6e872";
       flake = false;
     };
-    inputs.nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
    
   outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, nix-doom-emacs, ... }:
