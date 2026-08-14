@@ -14,6 +14,5 @@
     ./wallpaper.nix
     ./yazi.nix
     ./lazyvim.nix
-    ./doom.nix
   ];
 }
