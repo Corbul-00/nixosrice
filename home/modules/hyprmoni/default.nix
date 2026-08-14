@@ -13,5 +13,6 @@
     ./fastfetch.nix
     ./wallpaper.nix
     ./yazi.nix
+    ./lazyvim.nix
   ];
 }

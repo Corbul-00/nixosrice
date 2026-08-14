@@ -6,5 +6,6 @@
     ../modules/gtk/pink.nix
     ../modules/fastfetch/pink.nix
     ../modules/frieren/cursor.nix
+    ../modules/lazyvim/default.nix
   ];
 }
