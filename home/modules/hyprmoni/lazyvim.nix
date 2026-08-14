@@ -13,9 +13,7 @@
       python3
     ];
 
-    # ─────────────────────────────────────────────
     # Hyprmoni colorscheme
-    # ─────────────────────────────────────────────
     plugins.colorscheme = ''
       return {
         "folke/tokyonight.nvim",
@@ -60,10 +58,35 @@
             hl.WinSeparator = { fg = "#67253F" }
             hl.VertSplit    = { fg = "#67253F" }
 
-            hl.CursorLine   = { bg = "#1B1B1B" }
-            hl.CursorLineNr = { fg = "#FD5BA2", bold = true }
-            hl.LineNr       = { fg = "#67253F" }
+            hl.CursorLine = {
+              bg = "#1B1B1B",
+            }
 
+            hl.CursorLineNr = {
+              fg = "#FD5BA2",
+              bold = true,
+            }
+
+            hl.LineNr = {
+              fg = "#67253F",
+            }
+
+            -- Indent guides
+            hl.IblIndent = {
+              fg = "#401929",
+            }
+
+            hl.IblWhitespace = {
+              fg = "#401929",
+            }
+
+            -- Current indentation / scope
+            hl.IblScope = {
+              fg = "#FD5BA2",
+              bold = true,
+            }
+
+            -- Selection
             hl.Visual = {
               bg = "#401929",
               fg = "#FFD9E8",
@@ -81,10 +104,22 @@
               bold = true,
             }
 
-            -- Completion / popup menus
-            hl.Pmenu       = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.PmenuSel    = { fg = "#FFD9E8", bg = "#401929", bold = true }
-            hl.PmenuBorder = { fg = "#CE4A7E", bg = "#1B1B1B" }
+            -- Completion
+            hl.Pmenu = {
+              fg = "#FFD9E8",
+              bg = "#1B1B1B",
+            }
+
+            hl.PmenuSel = {
+              fg = "#FFD9E8",
+              bg = "#401929",
+              bold = true,
+            }
+
+            hl.PmenuBorder = {
+              fg = "#CE4A7E",
+              bg = "#1B1B1B",
+            }
 
             -- Diagnostics
             hl.DiagnosticError = { fg = "#FD5BA2" }
@@ -105,68 +140,181 @@
             hl.SnacksDashboardFile   = { fg = "#FFD9E8" }
             hl.SnacksDashboardFooter = { fg = "#CE4A7E" }
 
-            -- Snacks picker / recent files
-            hl.SnacksPickerBorder       = { fg = "#67253F" }
-            hl.SnacksPickerTitle        = { fg = "#FD5BA2" }
-            hl.SnacksPickerPrompt       = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.SnacksPickerInput        = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.SnacksPickerList         = { fg = "#FFD9E8", bg = "#0D0D0D" }
-            hl.SnacksPickerPreview      = { fg = "#FFD9E8", bg = "#0D0D0D" }
-            hl.SnacksPickerSelected     = { fg = "#FFD9E8", bg = "#401929" }
-            hl.SnacksPickerMatch        = { fg = "#FD5BA2", bold = true }
-            hl.SnacksPickerDir          = { fg = "#CE4A7E" }
-            hl.SnacksPickerFile         = { fg = "#FFD9E8" }
+            -- Snacks picker
+            hl.SnacksPickerBorder   = { fg = "#67253F" }
+            hl.SnacksPickerTitle    = { fg = "#FD5BA2" }
+            hl.SnacksPickerPrompt   = { fg = "#FFD9E8", bg = "#1B1B1B" }
+            hl.SnacksPickerInput    = { fg = "#FFD9E8", bg = "#1B1B1B" }
+            hl.SnacksPickerList     = { fg = "#FFD9E8", bg = "#0D0D0D" }
+            hl.SnacksPickerPreview  = { fg = "#FFD9E8", bg = "#0D0D0D" }
+            hl.SnacksPickerSelected = { fg = "#FFD9E8", bg = "#401929" }
+            hl.SnacksPickerMatch   = { fg = "#FD5BA2", bold = true }
+            hl.SnacksPickerDir     = { fg = "#CE4A7E" }
+            hl.SnacksPickerFile    = { fg = "#FFD9E8" }
 
-            -- Generic Snacks UI
-            hl.SnacksInputBorder        = { fg = "#67253F" }
-            hl.SnacksInputTitle         = { fg = "#FD5BA2" }
-            hl.SnacksInputNormal        = { fg = "#FFD9E8", bg = "#1B1B1B" }
+            -- Snacks input
+            hl.SnacksInputBorder = { fg = "#67253F" }
+            hl.SnacksInputTitle  = { fg = "#FD5BA2" }
+            hl.SnacksInputNormal = {
+              fg = "#FFD9E8",
+              bg = "#1B1B1B",
+            }
 
             -- Which-key
-            hl.WhichKey           = { fg = "#FD5BA2" }
-            hl.WhichKeyGroup      = { fg = "#CE4A7E" }
-            hl.WhichKeyDesc       = { fg = "#FFD9E8" }
-            hl.WhichKeySeparator  = { fg = "#67253F" }
+            hl.WhichKey = {
+              fg = "#FD5BA2",
+            }
+
+            hl.WhichKeyGroup = {
+              fg = "#CE4A7E",
+            }
+
+            hl.WhichKeyDesc = {
+              fg = "#FFD9E8",
+            }
+
+            hl.WhichKeySeparator = {
+              fg = "#67253F",
+            }
 
             -- Statusline / tabline
-            hl.StatusLine   = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.StatusLineNC = { fg = "#BFBFBF", bg = "#1B1B1B" }
+            hl.StatusLine = {
+              fg = "#FFD9E8",
+              bg = "#1B1B1B",
+            }
 
-            hl.TabLine     = { fg = "#BFBFBF", bg = "#1B1B1B" }
-            hl.TabLineFill = { fg = "#BFBFBF", bg = "#0D0D0D" }
-            hl.TabLineSel  = { fg = "#FFD9E8", bg = "#401929", bold = true }
+            hl.StatusLineNC = {
+              fg = "#BFBFBF",
+              bg = "#1B1B1B",
+            }
 
-            -- Telescope, for anything still using it
-            hl.TelescopeNormal        = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.TelescopeBorder        = { fg = "#67253F", bg = "#1B1B1B" }
-            hl.TelescopePrompt        = { fg = "#FFD9E8", bg = "#401929" }
-            hl.TelescopePromptBorder  = { fg = "#CE4A7E", bg = "#401929" }
-            hl.TelescopeSelection     = { fg = "#FFD9E8", bg = "#401929", bold = true }
-            hl.TelescopeMatching      = { fg = "#FD5BA2", bold = true }
+            hl.TabLine = {
+              fg = "#BFBFBF",
+              bg = "#1B1B1B",
+            }
+
+            hl.TabLineFill = {
+              fg = "#BFBFBF",
+              bg = "#0D0D0D",
+            }
+
+            hl.TabLineSel = {
+              fg = "#FFD9E8",
+              bg = "#401929",
+              bold = true,
+            }
+
+            -- Telescope
+            hl.TelescopeNormal = {
+              fg = "#FFD9E8",
+              bg = "#1B1B1B",
+            }
+
+            hl.TelescopeBorder = {
+              fg = "#67253F",
+              bg = "#1B1B1B",
+            }
+
+            hl.TelescopePrompt = {
+              fg = "#FFD9E8",
+              bg = "#401929",
+            }
+
+            hl.TelescopePromptBorder = {
+              fg = "#CE4A7E",
+              bg = "#401929",
+            }
+
+            hl.TelescopeSelection = {
+              fg = "#FFD9E8",
+              bg = "#401929",
+              bold = true,
+            }
+
+            hl.TelescopeMatching = {
+              fg = "#FD5BA2",
+              bold = true,
+            }
 
             -- Neo-tree
-            hl.NeoTreeNormal          = { fg = "#FFD9E8", bg = "#1B1B1B" }
-            hl.NeoTreeDirectoryIcon   = { fg = "#CE4A7E" }
-            hl.NeoTreeDirectoryName   = { fg = "#FFD9E8" }
-            hl.NeoTreeCursorLine      = { bg = "#401929" }
+            hl.NeoTreeNormal = {
+              fg = "#FFD9E8",
+              bg = "#1B1B1B",
+            }
 
-            -- General blue/cyan groups that plugins commonly inherit
-            hl.Identifier = { fg = "#FFD9E8" }
-            hl.Special    = { fg = "#FD5BA2" }
-            hl.Function   = { fg = "#FD5BA2", bold = true }
-            hl.Keyword    = { fg = "#CE4A7E", bold = true }
-            hl.Statement  = { fg = "#CE4A7E" }
-            hl.Type       = { fg = "#FFD9E8" }
-            hl.String     = { fg = "#FFAA99" }
-            hl.Number     = { fg = "#FFAA99" }
-            hl.Constant   = { fg = "#FFAA99" }
-            hl.Operator   = { fg = "#FFAA99" }
-            hl.Comment    = { fg = "#BFBFBF", italic = true }
+            hl.NeoTreeDirectoryIcon = {
+              fg = "#CE4A7E",
+            }
+
+            hl.NeoTreeDirectoryName = {
+              fg = "#FFD9E8",
+            }
+
+            hl.NeoTreeCursorLine = {
+              bg = "#401929",
+            }
+
+            -- Syntax
+            hl.Identifier = {
+              fg = "#FFD9E8",
+            }
+
+            hl.Special = {
+              fg = "#FD5BA2",
+            }
+
+            hl.Function = {
+              fg = "#FD5BA2",
+              bold = true,
+            }
+
+            hl.Keyword = {
+              fg = "#CE4A7E",
+              bold = true,
+            }
+
+            hl.Statement = {
+              fg = "#CE4A7E",
+            }
+
+            hl.Type = {
+              fg = "#FFD9E8",
+            }
+
+            hl.String = {
+              fg = "#FFAA99",
+            }
+
+            hl.Number = {
+              fg = "#FFAA99",
+            }
+
+            hl.Constant = {
+              fg = "#FFAA99",
+            }
+
+            hl.Operator = {
+              fg = "#FFAA99",
+            }
+
+            hl.Comment = {
+              fg = "#BFBFBF",
+              italic = true,
+            }
 
             -- LSP references
-            hl.LspReferenceText  = { bg = "#401929" }
-            hl.LspReferenceRead  = { bg = "#401929" }
-            hl.LspReferenceWrite = { bg = "#401929", fg = "#FD5BA2" }
+            hl.LspReferenceText = {
+              bg = "#401929",
+            }
+
+            hl.LspReferenceRead = {
+              bg = "#401929",
+            }
+
+            hl.LspReferenceWrite = {
+              bg = "#401929",
+              fg = "#FD5BA2",
+            }
           end,
         },
 
@@ -177,9 +325,7 @@
       }
     '';
 
-    # ─────────────────────────────────────────────
     # MoniVim dashboard
-    # ─────────────────────────────────────────────
     plugins.snacks = ''
       return {
         "folke/snacks.nvim",
@@ -187,14 +333,14 @@
           dashboard = {
             preset = {
               header = table.concat({
-                " ███╗   ███╗ ██████╗ ███╗   ██╗██╗██╗   ██╗██╗███╗   ███╗",
-                " ████╗ ████║██╔═══██╗████╗  ██║██║██║   ██║██║████╗ ████║",
-                " ██╔████╔██║██║   ██║██╔██╗ ██║██║██║   ██║██║██╔████╔██║",
-                " ██║╚██╔╝██║██║   ██║██║╚██╗██║██║╚██╗ ██╔╝██║██║╚██╔╝██║",
-                " ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║ ╚████╔╝ ██║██║ ╚═╝ ██║",
-                " ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝",
+                " ███╗   ███╗ ██████╗ ███╗   ██╗██╗███╗   ██╗",
+                " ████╗ ████║██╔═══██╗████╗  ██║██║████╗  ██║",
+                " ██╔████╔██║██║   ██║██╔██╗ ██║██║██╔██╗ ██║",
+                " ██║╚██╔╝██║██║   ██║██║╚██╗██║██║██║╚██╗██║",
+                " ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║██║██║ ╚████║",
+                " ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝",
                 "",
-                "                         MoniVim",
+                "                    MoniVim",
               }, "\n"),
             },
           },
@@ -202,9 +348,7 @@
       }
     '';
 
-    # ─────────────────────────────────────────────
     # Discord Rich Presence
-    # ─────────────────────────────────────────────
     plugins.cord = ''
       return {
         dir = "${pkgs.vimPlugins.cord-nvim}",
