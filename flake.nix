@@ -11,9 +11,10 @@
       url = "github:Ascaniolamp/Hyprlain/ffb81b75911562085ca802e9f4e66cab4bb6e872";
       flake = false;
     };
+    inputs.nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
    
-  outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, ... }:
+  outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, nix-doom-emacs, ... }:
   let
     system = "86_64-linux";
     in {
@@ -27,7 +28,7 @@
 	   home-manager.useUserPackages = true; 
 	   home-manager.users.corbul = import ./home.nix;
 	   home-manager.backupFileExtension = "backup";
-	   home-manager.extraSpecialArgs = { inherit lazyvim-nix hyprlain; };  #Add in home
+	   home-manager.extraSpecialArgs = { inherit lazyvim-nix hyprlain nix-doom-emacs; };  #Add in home
 	  }
         ]; 
      };
