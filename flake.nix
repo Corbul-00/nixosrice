@@ -14,9 +14,14 @@
       flake = false;
     };
 
+    nix-doom-emacs-unstraightened = {
+        url = "github:marienz/nix-doom-emacs-unstraightened";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
    };
    
-  outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, ... }:
+  outputs = { self, nixpkgs, home-manager, lazyvim-nix, hyprlain, nix-doom-emacs-unstraightened, ... }:
   let
     system = "86_64-linux";
     in {
@@ -30,7 +35,7 @@
 	   home-manager.useUserPackages = true; 
 	   home-manager.users.corbul = import ./home.nix;
 	   home-manager.backupFileExtension = "backup";
-	   home-manager.extraSpecialArgs = { inherit lazyvim-nix hyprlain; };  #Add in home
+	   home-manager.extraSpecialArgs = { inherit lazyvim-nix hyprlain nix-doom-emacs-unstraightened; };  #Add in home
 	  }
         ]; 
      };
