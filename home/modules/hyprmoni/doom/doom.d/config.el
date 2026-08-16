@@ -93,3 +93,39 @@
 
 ;;; Keybindings -------------------------------------------------------------------
 ;; `map!` bindings go here as you add them.
+
+;;; Treemacs ----------------------------------------------------------------------
+(after! treemacs
+  (require 'treemacs-evil)
+  (require 'treemacs-nerd-icons)
+
+  (treemacs-load-theme "nerd-icons")
+
+  (setq treemacs-width 25
+        treemacs-is-never-other-window nil
+        treemacs-space-between-root-nodes nil)
+
+  (set-face-attribute 'treemacs-file-face nil
+                      :foreground "#70E1E8")
+  (set-face-attribute 'treemacs-directory-face nil
+                      :foreground "#5ec4ff")
+
+  (add-hook 'treemacs-mode-hook
+            (lambda ()
+              (text-scale-set -1))))
+
+(defun my/treemacs-toggle ()
+  "Toggle Treemacs and ensure it takes over the frame if opened."
+  (interactive)
+  (require 'treemacs)
+  (let ((treemacs-window (treemacs-get-local-window)))
+    (if treemacs-window
+        (delete-window treemacs-window)
+      (progn
+        (treemacs-display-current-project-exclusively)
+        ;; Force it to take the whole frame
+        (delete-other-windows)))))
+
+;; Navigation
+(after! evil
+  (define-key evil-normal-state-map (kbd "C-n") #'my/treemacs-toggle))

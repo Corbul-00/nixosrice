@@ -12,6 +12,7 @@
        nav-flash
        ophints
        (popup +defaults)
+       treemacs
        vc-gutter        ; git signs, like lazyvim's gitsigns
        workspaces        ; per-project tabs, like lazyvim's tab/bufferline
 
