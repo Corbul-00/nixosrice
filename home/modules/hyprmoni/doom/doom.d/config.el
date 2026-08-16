@@ -42,13 +42,34 @@
 ;; of its own, so resizing has to happen on the Nix side, not here.
 (setq fancy-splash-image "~/.config/hyprmoni/assets/doom-banner.png")
 
+(setq +dashboard-banner-vertical-padding '(2 . 2)
+      +dashboard-anchor '(center . center))
+
+;; Random footer messages
+(setq my/dashboard-footer-messages
+      '("The one true editor, Emacs!"
+        "Who the hell uses VIM anyway? Go Evil!"
+        "Free as free speech, free as free Beer"
+        "Happy coding!"
+        "Vi Vi Vi, the editor of the beast"
+        "Welcome to the church of Emacs"
+        "While any text editor can save your files, only Emacs can save your soul"
+        "I showed you my source code, pls respond"))
+
+(defun my/dashboard-widget-footer ()
+  (let ((msg (nth (random (length my/dashboard-footer-messages))
+                  my/dashboard-footer-messages)))
+    (+dashboard-insert msg)))
+
+;; substitui o footer padrão do Doom
+(remove-hook '+dashboard-functions #'+dashboard-widget-footer)
+(add-hook! '+dashboard-functions :append
+  #'my/dashboard-widget-footer)
+
 ;; Blank lines padding the banner above/below, and where the whole
 ;; dashboard (banner + menu + footer) sits in the window.
 (setq +dashboard-banner-vertical-padding '(2 . 2)
       +dashboard-anchor '(center . center))
-
-;; Footer
-(setq dashboard-set-footer t)
 
 ;; TTY fallback (fancy-splash-image only applies when (display-graphic-p)).
 ;; Must RETURN a propertized string - Doom inserts it itself, this function
