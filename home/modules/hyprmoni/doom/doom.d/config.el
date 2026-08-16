@@ -47,6 +47,9 @@
 (setq +dashboard-banner-vertical-padding '(2 . 2)
       +dashboard-anchor '(center . center))
 
+;; Footer
+(setq dashboard-set-footer t)
+
 ;; TTY fallback (fancy-splash-image only applies when (display-graphic-p)).
 ;; Must RETURN a propertized string - Doom inserts it itself, this function
 ;; doesn't insert anything directly.
