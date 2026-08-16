@@ -78,10 +78,10 @@
 ;; `org` is already turned on in init.el (:lang (org +dragndrop +pandoc)),
 ;; deliberately left unconfigured for now. Drop things in here later, e.g.:
 ;;
-;; (after! org
-;;   (setq org-directory "~/org/"
-;;         org-agenda-files (list org-directory)
-;;         org-ellipsis " ▾"))
+ (after! org
+   (setq org-directory "~/org/"
+         org-agenda-files (list org-directory)
+         org-ellipsis " ▾"))
 
 ;;; Nix -------------------------------------------------------------------------
 (after! nix-mode
