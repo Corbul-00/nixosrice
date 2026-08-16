@@ -129,3 +129,17 @@
 ;; Navigation
 (after! evil
   (define-key evil-normal-state-map (kbd "C-n") #'my/treemacs-toggle))
+
+;;; Elcord ----------------------------------------------------------------------
+(after! elcord
+  (setq elcord-editor-name "Doom Emacs"
+        elcord-editor-icon "doom_icon"
+        elcord-use-major-mode-as-main-icon nil
+        elcord-display-buffer-details t
+        elcord-display-line-numbers nil
+        elcord-refresh-rate 15
+        elcord-idle-timer 300
+        elcord-idle-message "Taking a break"
+        elcord-quiet t)
+
+  (elcord-mode 1))
