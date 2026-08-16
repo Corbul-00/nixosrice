@@ -2,5 +2,4 @@
 ;;; packages.el
 
 
-(package! elcord
-  :pin "COMMIT-HASH")
+(package! elcord)
