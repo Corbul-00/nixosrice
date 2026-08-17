@@ -1,28 +1,32 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   #GPU SYNC
-   hardware.nvidia.prime = {
-     sync.enable = true;
-     #I
-     intelBusId= "PCI:00:02:0";
-     #D
-     nvidiaBusId = "PCI:01:00:0";
-   };
-
+  hardware.nvidia.prime = {
+    sync.enable = true;
+    #I
+    intelBusId = "PCI:00:02:0";
+    #D
+    nvidiaBusId = "PCI:01:00:0";
+  };
 
   #Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
   #Kernel
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
@@ -39,14 +43,13 @@
     "vm.max_map_count" = 2147483642;
   };
 
-  # Zram 
+  # Zram
   zramSwap = {
     enable = true;
     memoryPercent = 50;
   };
 
-
-  networking.hostName = "waifuroom"; 
+  networking.hostName = "waifuroom";
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
@@ -59,50 +62,53 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-   i18n.defaultLocale = "en_GB.UTF-8";
-   console = {
-     font = "Lat2-Terminus16";
-     keyMap = "br-abnt2";
-   };
-
+  i18n.defaultLocale = "en_GB.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "br-abnt2";
+  };
 
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
-   services.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.corbul = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "networkmanager" "video" "audio" ]; # Enable ‘sudo’ for the user.
+  users.users.corbul = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+    ]; # Enable ‘sudo’ for the user.
 
-     #Fish
+    #Fish
 
-     shell = pkgs.fish;
-     packages = with pkgs; [
-       tree
-     ];
-   };
+    shell = pkgs.fish;
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
   programs.firefox.enable = true;
-  
+
   fonts = {
-    enableDefaultPackages = true;     # usually already true, but good to have
-    fontconfig.enable     = true;     # enables font cache → very important
+    enableDefaultPackages = true; # usually already true, but good to have
+    fontconfig.enable = true; # enables font cache → very important
   };
-  
-  #Env-Variables 
-  
+
+  #Env-Variables
+
   environment.variables = {
     NH_FLAKE = "/etc/nixos";
   };
-
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -187,12 +193,13 @@
     (import ./home/modules/sddm/sddm.nix { inherit pkgs; })
     qemu
     OVMF
+    vesktop
   ];
 
   #HYPRLAND_SDDM
   programs.hyprland = {
-    enable = true; 
-    withUWSM = true; 
+    enable = true;
+    withUWSM = true;
   };
   services.displayManager.sddm = {
     enable = true;
@@ -208,38 +215,38 @@
     ];
 
   };
-  
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
-  
+
   #Thunar
 
   # Habilita o programa e sua integração no sistema
   programs.thunar.enable = true;
 
-# Opcional: Adiciona plugins úteis (como extração de arquivos e controle de discos)
+  # Opcional: Adiciona plugins úteis (como extração de arquivos e controle de discos)
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman
   ];
 
-# Opcional, mas altamente recomendado: Suporte para lixeira, pen drives e miniaturas
-services.gvfs.enable = true; # Montagem automática, lixeira e redes
-services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
-  
+  # Opcional, mas altamente recomendado: Suporte para lixeira, pen drives e miniaturas
+  services.gvfs.enable = true; # Montagem automática, lixeira e redes
+  services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
+
   #NVIDIA_DO_DIABO
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true; 
-    open = false;  
+    powerManagement.enable = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-  
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   #STEAM
@@ -248,7 +255,7 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
   programs.steam.gamescopeSession.enable = true;
   programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
   programs.gamemode.enable = true;
-  
+
   #NixHelper - NH
 
   programs.nh = {
@@ -257,37 +264,42 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
 
     clean.enable = true;
   };
-  
+
   #Doas
 
   security.doas = {
     enable = true;
-    extraRules = [{
-      users = [ "corbul" ];
-      keepEnv = true;
-      persist = true;
-    }];
- };
+    extraRules = [
+      {
+        users = [ "corbul" ];
+        keepEnv = true;
+        persist = true;
+      }
+    ];
+  };
 
   #Shell
   programs.fish.enable = true;
 
   #Flakes experimental and direnv
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   programs.direnv.enable = true;
 
   #AppImage Enable
-   
-  programs.appimage = {
-      enable = true;
-      binfmt = true;
-    };
 
-  #NixLd, for non traditional games 
-  
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  #NixLd, for non traditional games
+
   programs.nix-ld.enable = true;
-  
+
   programs.nix-ld.libraries = with pkgs; [
     # Common libs for UE games + general
     stdenv.cc.cc.lib
@@ -305,10 +317,8 @@ services.tumbler.enable = true; # Geração de miniaturas para imagens e vídeos
     xorg.libXScrnSaver
     # Add more if it complains (see below)
   ];
- 
 
-
-  #Ollama 
+  #Ollama
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
