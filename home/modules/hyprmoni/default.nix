@@ -15,5 +15,6 @@
     ./yazi.nix
     ./lazyvim.nix
     ./doom/doom.nix
+    ./emacs-sc.nix
   ];
 }
