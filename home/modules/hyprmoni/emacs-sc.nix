@@ -20,19 +20,13 @@ let
         dir="''${dir:-$HOME}"
       fi
 
-      case "$dir" in
-        "~")
-          dir="$HOME"
-          ;;
-        "~/"*)
-          dir="$HOME/''${dir#~/}"
-          ;;
-        /*)
-          ;;
-        *)
-          dir="$HOME/$dir"
-          ;;
-      esac
+      if [ "$dir" = "~" ]; then
+        dir="$HOME"
+      elif [[ "$dir" == "~/"* ]]; then
+        dir="$HOME/''${dir#~/}"
+      elif [[ "$dir" != /* ]]; then
+        dir="$HOME/$dir"
+      fi
 
       if [ ! -d "$dir" ]; then
         notify-send "Doom Emacs" "Directory does not exist: $dir"
