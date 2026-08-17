@@ -47,18 +47,20 @@
 
 ;; Random footer messages
 (setq my/dashboard-footer-messages
-      '(("The one true editor, Emacs!" . nil)
-        ("Who the hell uses VIM anyway? Go Evil!" . nil)
-        ("Free as free speech, free as free Beer" . nil)
-        ("Happy coding!" . nil)
+      '(("The one true editor, Emacs!" . "🗿") 
+        ("Who the hell uses VIM anyway? Go Evil!" . (nerd-icons-mdicon . "nf-md-emoticon_devil"))
+        ("Free as free speech, free as free Beer" . (nerd-icons-mdicon . "nf-md-beer"))
+        ("Happy coding!" . (nerd-icons-mdicon . "nf-md-emoticon_happy"))
         ("A day without coding for Monika is a wasted day..."
-         . (nerd-icons-faicon . "nf-fa-place_of_worship"))
+         . (nerd-icons-faicon . "nf-fa-hands_praying"))
         ("Everyday I imagine a future where I Linux larp with you..."
          . (nerd-icons-mdicon . "nf-md-heart"))
-        ("Ever thought of configuring Monika with Emacs?" . nil)
-        ("Vi Vi Vi, the editor of the beast" . nil)
-        ("Welcome to the church of Emacs" . nil)
-        ("While any text editor can save your files, only Emacs can save your soul" . nil)
+        ("Ever thought of configuring Monika with Emacs?" . (nerd-icons-mdicon . "nf-md-head_question"))
+        ("Vi Vi Vi, the editor of the beast" . (nerd-icons-mdicon . "nf-md-emoticon_devil"))
+        ("Welcome to the church of Emacs"
+         . (nerd-icons-faicon . "nf-fa-place_of_worship"))
+        ("While any text editor can save your files, only Emacs can save your soul"
+         . (nerd-icons-faicon . "nf-fa-place_of_worship"))
         ("I showed you my source code, pls respond" . nil)))
 
 
