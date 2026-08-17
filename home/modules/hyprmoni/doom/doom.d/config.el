@@ -47,23 +47,40 @@
 
 ;; Random footer messages
 (setq my/dashboard-footer-messages
-      '("The one true editor, Emacs!"
-        "Who the hell uses VIM anyway? Go Evil!"
-        "Free as free speech, free as free Beer"
-        "Happy coding!"
-        "A day without coding for Monika is a wasted day..."
-        "Everyday I imagine a future where I Linux larp with you..."
-        "Ever thought of configuring Monika with Emacs?"
-        "Vi Vi Vi, the editor of the beast"
-        "Welcome to the church of Emacs"
-        "While any text editor can save your files, only Emacs can save your soul"
-        "I showed you my source code, pls respond"))
+      '(("The one true editor, Emacs!" . nil)
+        ("Who the hell uses VIM anyway? Go Evil!" . nil)
+        ("Free as free speech, free as free Beer" . nil)
+        ("Happy coding!" . nil)
+        ("A day without coding for Monika is a wasted day..." . nil)
+        ("Everyday I imagine a future where I Linux larp with you..."
+         . (nerd-icons-mdicon . "nf-md-heart"))
+        ("Ever thought of configuring Monika with Emacs?" . nil)
+        ("Vi Vi Vi, the editor of the beast" . nil)
+        ("Welcome to the church of Emacs" . nil)
+        ("While any text editor can save your files, only Emacs can save your soul" . nil)
+        ("I showed you my source code, pls respond" . nil)))
+
 
 (defun my/dashboard-widget-footer ()
-  (let ((msg (nth (random (length my/dashboard-footer-messages))
-                  my/dashboard-footer-messages)))
+  (let* ((entry (nth (random (length my/dashboard-footer-messages))
+                     my/dashboard-footer-messages))
+         (msg   (car entry))          ; the message text
+         (extra (cdr entry))          ; nil, or (FUNCTION . ICON-NAME)
+         ;; Always-present Emacs icon, from the "custom" nerd-icon set
+         (emacs-icon (nerd-icons-sucicon "nf-custom-emacs"
+                                         :height 1.1 :v-adjust -0.05
+                                         :face 'doom-dashboard-menu-title))
+         ;; Optional second icon, built by calling whatever function
+         ;; was paired with this message (or nil if none)
+         (extra-icon (when extra
+                       (funcall (car extra) (cdr extra)
+                                :height 1.1 :v-adjust -0.05
+                                :face 'doom-dashboard-menu-title))))
     (insert "\n\n\n\n\n")
-    (+dashboard-insert msg)))
+    (+dashboard-insert
+     (concat emacs-icon " "
+             (if extra-icon (concat extra-icon " ") "")
+             msg))))
 
 ;; substitui o footer padrão do Doom
 (remove-hook '+dashboard-functions #'+dashboard-widget-footer)
