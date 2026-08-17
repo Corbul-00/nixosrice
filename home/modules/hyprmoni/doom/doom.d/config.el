@@ -19,22 +19,22 @@
 (setq doom-theme 'doom-tokyo-night)
 
 (custom-set-faces!
- '(default                     :background "#0D0D0D" :foreground "#FFD9E8")
- '(cursor                      :background "#FD5BA2")
- '(region                      :background "#401929")
- '(hl-line                     :background "#1B1B1B")
- '(line-number                 :foreground "#67253F")
- '(line-number-current-line    :foreground "#FD5BA2" :bold t)
- '(vertical-border              :foreground "#67253F")
- '(font-lock-comment-face       :foreground "#BFBFBF" :italic t)
- '(font-lock-keyword-face       :foreground "#CE4A7E" :bold t)
- '(font-lock-function-name-face :foreground "#FD5BA2" :bold t)
- '(font-lock-string-face        :foreground "#FFAA99")
- '(font-lock-constant-face      :foreground "#FFAA99")
- '(font-lock-type-face          :foreground "#FFD9E8")
- '(doom-modeline-bar            :background "#FD5BA2")
- '(mode-line                    :background "#1B1B1B" :foreground "#FFD9E8")
- '(mode-line-inactive           :background "#1B1B1B" :foreground "#BFBFBF"))
+  '(default                     :background "#0D0D0D" :foreground "#FFD9E8")
+  '(cursor                      :background "#FD5BA2")
+  '(region                      :background "#401929")
+  '(hl-line                     :background "#1B1B1B")
+  '(line-number                 :foreground "#67253F")
+  '(line-number-current-line    :foreground "#FD5BA2" :bold t)
+  '(vertical-border              :foreground "#67253F")
+  '(font-lock-comment-face       :foreground "#BFBFBF" :italic t)
+  '(font-lock-keyword-face       :foreground "#CE4A7E" :bold t)
+  '(font-lock-function-name-face :foreground "#FD5BA2" :bold t)
+  '(font-lock-string-face        :foreground "#FFAA99")
+  '(font-lock-constant-face      :foreground "#FFAA99")
+  '(font-lock-type-face          :foreground "#FFD9E8")
+  '(doom-modeline-bar            :background "#FD5BA2")
+  '(mode-line                    :background "#1B1B1B" :foreground "#FFD9E8")
+  '(mode-line-inactive           :background "#1B1B1B" :foreground "#BFBFBF"))
 
 ;;; Dashboard ---------------------------------------------------------------
 ;; Points at the pre-resized copy doom.nix generates (see doomBannerWidth
@@ -51,6 +51,9 @@
         "Who the hell uses VIM anyway? Go Evil!"
         "Free as free speech, free as free Beer"
         "Happy coding!"
+        "A day without coding for Monika is a wasted day..."
+        "Everyday I imagine a future where I Linux larp with you..."
+        "Ever thought of configuring Monika with Emacs?"
         "Vi Vi Vi, the editor of the beast"
         "Welcome to the church of Emacs"
         "While any text editor can save your files, only Emacs can save your soul"
@@ -61,10 +64,14 @@
                   my/dashboard-footer-messages)))
     (+dashboard-insert msg)))
 
+;; Add gap between package status and footer
+(defun my/dashboard-widget-footer-spacer ()
+  (insert "\n"))
+
 ;; substitui o footer padrão do Doom
 (remove-hook '+dashboard-functions #'+dashboard-widget-footer)
 (add-hook! '+dashboard-functions :append
-  #'my/dashboard-widget-footer)
+           #'my/dashboard-widget-footer)
 
 ;; Blank lines padding the banner above/below, and where the whole
 ;; dashboard (banner + menu + footer) sits in the window.
@@ -102,10 +109,10 @@
 ;; `org` is already turned on in init.el (:lang (org +dragndrop +pandoc)),
 ;; deliberately left unconfigured for now. Drop things in here later, e.g.:
 ;;
- (after! org
-   (setq org-directory "~/org/"
-         org-agenda-files (list org-directory)
-         org-ellipsis " ▾"))
+(after! org
+  (setq org-directory "~/org/"
+        org-agenda-files (list org-directory)
+        org-ellipsis " ▾"))
 
 ;;; Nix -------------------------------------------------------------------------
 (after! nix-mode
