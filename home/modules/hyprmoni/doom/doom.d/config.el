@@ -47,7 +47,7 @@
 
 ;; Random footer messages
 (setq my/dashboard-footer-messages
-      '(("The one true editor, Emacs!" . "🗿") 
+      '(("The one true editor, Emacs!" . nil) 
         ("Who the hell uses VIM anyway? Go Evil!" . (nerd-icons-mdicon . "nf-md-emoticon_devil"))
         ("Free as free speech, free as free Beer" . (nerd-icons-mdicon . "nf-md-beer"))
         ("Happy coding!" . (nerd-icons-mdicon . "nf-md-emoticon_happy"))
