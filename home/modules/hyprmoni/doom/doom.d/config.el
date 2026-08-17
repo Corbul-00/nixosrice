@@ -66,11 +66,12 @@
 
 ;; Add gap between package status and footer
 (defun my/dashboard-widget-footer-spacer ()
-  (insert "\n"))
+  (insert "\n\n\n"))
 
 ;; substitui o footer padrão do Doom
 (remove-hook '+dashboard-functions #'+dashboard-widget-footer)
 (add-hook! '+dashboard-functions :append
+           #'my/dashboard-widget-footer-spacer
            #'my/dashboard-widget-footer)
 
 ;; Blank lines padding the banner above/below, and where the whole
