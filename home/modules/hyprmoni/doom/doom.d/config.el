@@ -62,7 +62,7 @@
 (defun my/dashboard-widget-footer ()
   (let ((msg (nth (random (length my/dashboard-footer-messages))
                   my/dashboard-footer-messages)))
-    (insert "\n\n\n")
+    (insert "\n\n\n\n\n")
     (+dashboard-insert msg)))
 
 ;; substitui o footer padrão do Doom
