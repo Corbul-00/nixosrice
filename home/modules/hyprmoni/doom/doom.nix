@@ -37,6 +37,6 @@ in
     nixd
     nixfmt-rfc-style
     hunspell
-    hunspellDicts.en_GB
+    hunspellDicts.en_US
   ];
 }
