@@ -7,12 +7,10 @@ let
   # >>> Change this number to resize the banner. <
   doomBannerWidth = 420;
 
-  doomBanner = pkgs.runCommand "doom-banner.png"
-    { nativeBuildInputs = [ pkgs.imagemagick ]; }
-    ''
-      convert ${../assets/doombg.png} -resize ${toString doomBannerWidth}x doom-banner.png
-      cp doom-banner.png $out
-    '';
+  doomBanner = pkgs.runCommand "doom-banner.png" { nativeBuildInputs = [ pkgs.imagemagick ]; } ''
+    convert ${../assets/doombg.png} -resize ${toString doomBannerWidth}x doom-banner.png
+    cp doom-banner.png $out
+  '';
 in
 {
   imports = [
@@ -38,5 +36,7 @@ in
   home.packages = with pkgs; [
     nixd
     nixfmt-rfc-style
+    hunspell
+    hunspellDicts.en_GB
   ];
 }

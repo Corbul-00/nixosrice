@@ -163,6 +163,10 @@
 (after! nix-mode
   (setq nix-nixfmt-bin "nixfmt"))
 
+;;; Spell checking 
+(setq ispell-program-name "hunspell"
+      ispell-dictionary "en_US")
+
 ;;; Other languages -------------------------------------------------------------
 ;; Add `after!` blocks here as you enable more :lang modules in init.el
 ;; (rustic, python, markdown, etc).
