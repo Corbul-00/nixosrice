@@ -118,9 +118,6 @@
       // Niri normally expects either focus-ring OR border.
       // We explicitly disable the focus ring so the persistent
       // border becomes the visual equivalent of Hyprland's border.
-      focus-ring {
-        off
-      }
 
       // Hyprmoni's wine-colored shadow.
       shadow {
