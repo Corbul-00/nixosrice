@@ -3,6 +3,7 @@
     ./assets.nix
     ./fonts.nix
     ./hyprland.nix
+    ./niri.nix
     ./waybar.nix
     ./kitty.nix
     ./gtk.nix
