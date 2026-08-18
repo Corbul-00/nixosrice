@@ -103,10 +103,7 @@
       //
       // Focus ring replaces Hyprland's active border.
       focus-ring {
-        width 2
-        active-color "#FD5BA2"
-        inactive-color "#67253Fbb"
-        urgent-color "#FD5BA2"
+        off 
       }
 
       // Keep a persistent inactive border just like Hyprland's
