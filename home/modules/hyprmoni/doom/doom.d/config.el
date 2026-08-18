@@ -123,13 +123,41 @@
   (evil-ex-define-cmd "Ex" #'dired-jump))
 
 ;;; Org-mode ------------------------------------------------------------------
-;; `org` is already turned on in init.el (:lang (org +dragndrop +pandoc)),
-;; deliberately left unconfigured for now. Drop things in here later, e.g.:
-;;
 (after! org
-  (setq org-directory "~/org/"
-        org-agenda-files (list org-directory)
-        org-ellipsis " ▾"))
+  ;; Main notes directory
+  (setq org-directory (expand-file-name "~/Zettelkasten/"))
+
+  ;; Agenda files
+  (setq org-agenda-files
+        (list org-directory))
+
+  ;; Appearance
+  (setq org-hide-emphasis-markers t
+        org-startup-indented t
+        org-startup-with-inline-images t
+        org-image-actual-width nil
+        org-ellipsis " ▾"
+        org-return-follows-link t)
+
+  ;; Source blocks
+  (setq org-edit-src-content-indentation 0
+        org-src-preserve-indentation t)
+
+  ;; Open file links in current window
+  (setq org-link-frame-setup
+        '((file . find-file)))
+
+  ;; Evil-friendly navigation
+  (evil-define-key 'normal org-mode-map
+    (kbd "TAB") #'org-cycle
+    (kbd "RET") #'org-open-at-point))
+
+;;; Org-roam ------------------------------------------------------------------
+(after! org-roam
+  (setq org-roam-directory
+        (file-truename "~/Zettelkasten"))
+
+  (org-roam-db-autosync-mode))
 
 ;;; Nix -------------------------------------------------------------------------
 (after! nix-mode
