@@ -54,17 +54,20 @@ let
 
   # Render deterministic PNGs because GTK/Wlogout may not discover the SVG
   # pixbuf loader when launched from Hyprland on NixOS.
-  wlogoutIcons = pkgs.runCommand "hyprmoni-wlogout-icons" {
-    nativeBuildInputs = [ pkgs.librsvg ];
-  } ''
-    mkdir -p "$out"
-    rsvg-convert --width 128 --height 128 "${iconSources.lock}" --output "$out/lock.png"
-    rsvg-convert --width 128 --height 128 "${iconSources.logout}" --output "$out/logout.png"
-    rsvg-convert --width 128 --height 128 "${iconSources.suspend}" --output "$out/suspend.png"
-    rsvg-convert --width 128 --height 128 "${iconSources.hibernate}" --output "$out/hibernate.png"
-    rsvg-convert --width 128 --height 128 "${iconSources.reboot}" --output "$out/reboot.png"
-    rsvg-convert --width 128 --height 128 "${iconSources.shutdown}" --output "$out/shutdown.png"
-  '';
+  wlogoutIcons =
+    pkgs.runCommand "hyprmoni-wlogout-icons"
+      {
+        nativeBuildInputs = [ pkgs.librsvg ];
+      }
+      ''
+        mkdir -p "$out"
+        rsvg-convert --width 128 --height 128 "${iconSources.lock}" --output "$out/lock.png"
+        rsvg-convert --width 128 --height 128 "${iconSources.logout}" --output "$out/logout.png"
+        rsvg-convert --width 128 --height 128 "${iconSources.suspend}" --output "$out/suspend.png"
+        rsvg-convert --width 128 --height 128 "${iconSources.hibernate}" --output "$out/hibernate.png"
+        rsvg-convert --width 128 --height 128 "${iconSources.reboot}" --output "$out/reboot.png"
+        rsvg-convert --width 128 --height 128 "${iconSources.shutdown}" --output "$out/shutdown.png"
+      '';
 
   buttons = [
     {
@@ -76,7 +79,7 @@ let
     {
       label = "logout";
       #action = "hyprctl dispatch exit";
-      action = "loginctl terminate-session \"$XDG_SESSION_ID\""
+      action = "loginctl terminate-session \"$XDG_SESSION_ID\"";
       text = "Logout";
       keybind = "e";
     }
@@ -133,7 +136,8 @@ let
 in
 {
   xdg.configFile."wlogout-hyprmoni/layout".text =
-    pkgs.lib.concatMapStringsSep "\n" builtins.toJSON buttons;
+    pkgs.lib.concatMapStringsSep "\n" builtins.toJSON
+      buttons;
 
   xdg.configFile."wlogout-hyprmoni/style.css".text = ''
     * {
