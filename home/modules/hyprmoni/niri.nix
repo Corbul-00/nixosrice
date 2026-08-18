@@ -3,30 +3,17 @@
 {
   # ╔══════════════════════════════════════════════════════════════╗
   # ║                     HYPRMONI × NIRI                         ║
-  # ║              Niri 25.11 configuration for NixOS             ║
+  # ║                    Niri 25.11                              ║
   # ╚══════════════════════════════════════════════════════════════╝
   #
-  # This module is completely independent from hyprland.nix.
+  # Niri is completely independent from hyprland.nix.
   #
-  # Hyprland and Niri can coexist and be selected independently
-  # from the display manager.
+  # This configuration intentionally uses only Niri 25.11-compatible
+  # functionality.
   #
-  # The goal here is not to imitate Hyprland's compositor internals,
-  # but to preserve the Hyprmoni visual language, applications,
-  # keybind philosophy, wallpaper workflow and desktop behavior
-  # using Niri's native model.
-  #
-  # IMPORTANT:
-  # This configuration targets Niri 25.11.
-  # Newer Niri-only features such as background-effect are omitted.
+  # Hyprland remains untouched and can still be selected normally.
 
   xdg.configFile."niri/config.kdl".text = ''
-
-    // ╔══════════════════════════════════════════════════════════════╗
-    // ║                     HYPRMONI × NIRI                         ║
-    // ║                    Monika / Niri                           ║
-    // ╚══════════════════════════════════════════════════════════════╝
-
 
     // ──────────────────────────────────────────────────────────────
     // ENVIRONMENT
@@ -62,16 +49,20 @@
         }
       }
 
-      touchpad {
-        // Natural scrolling intentionally disabled.
-      }
-
       mouse {
-        // Same neutral acceleration used by the Hyprland setup.
         accel-speed 0
       }
 
-      // Equivalent to Hyprland's follow_mouse behavior.
+      touchpad {
+        tap
+        dwt
+        drag true
+        accel-speed 0.0
+        accel-profile "adaptive"
+        scroll-method "two-finger"
+        click-method "clickfinger"
+      }
+
       focus-follows-mouse
     }
 
@@ -79,29 +70,20 @@
     // ──────────────────────────────────────────────────────────────
     // LAYOUT
     // ──────────────────────────────────────────────────────────────
-    //
-    // Hyprland:
-    //
-    //   gaps_in  = 4
-    //   gaps_out = 8
-    //   dwindle
-    //
-    // Niri uses scrollable columns, so one gap value is used.
-    // 6 provides a close visual compromise for Hyprmoni.
 
     layout {
 
+      // Hyprmoni-style spacing.
       gaps 6
 
       center-focused-column "on-overflow"
 
-      // Disable Niri's focus ring.
-      // We use the always-visible border below instead.
+      // We use the persistent border instead of Niri's focus ring.
       focus-ring {
         off
       }
 
-      // Persistent Hyprmoni border.
+      // Hyprmoni pink/wine border.
       border {
         on
         width 2
@@ -111,7 +93,7 @@
         urgent-color "#FD5BA2"
       }
 
-      // Wine-colored Hyprmoni shadow.
+      // Hyprmoni wine-colored shadow.
       shadow {
         on
 
@@ -126,19 +108,20 @@
         inactive-color "#00000099"
       }
 
-      // Default width for newly created columns.
+      // IMPORTANT:
+      // New windows start at 75% of the output width.
+      //
+      // This is intentionally larger than the previous 50%.
       default-column-width {
-        proportion 0.5
+        proportion 0.75
       }
 
-      // Hyprmoni-friendly width presets.
       preset-column-widths {
         proportion 0.33333
         proportion 0.5
-        proportion 0.66667
+        proportion 0.75
       }
 
-      // Deep Hyprmoni background.
       background-color "#0D0D0D"
     }
 
@@ -147,7 +130,7 @@
     // STARTUP
     // ──────────────────────────────────────────────────────────────
 
-    // Restore the current Hyprmoni wallpaper.
+    // Restore Hyprmoni wallpaper.
     spawn-at-startup "swww-daemon"
 
     spawn-at-startup "hyprmoni-wallpapers" "--restore"
@@ -155,8 +138,14 @@
     // NetworkManager tray.
     spawn-at-startup "nm-applet"
 
-    // Same Waybar configuration used by Hyprland.
-    spawn-at-startup "waybar"
+    // IMPORTANT:
+    // Waybar is handled separately below.
+    //
+    // Do NOT use:
+    //
+    // spawn-at-startup "waybar"
+    //
+    // here, because your existing Waybar is managed by systemd.
 
 
     // ──────────────────────────────────────────────────────────────
@@ -169,17 +158,6 @@
     // ──────────────────────────────────────────────────────────────
     // ANIMATIONS
     // ──────────────────────────────────────────────────────────────
-    //
-    // These are Niri-native equivalents of the fast/smooth
-    // Hyprmoni animation character.
-    //
-    // Hyprland curves:
-    //
-    //   monikaEase = 0.22, 1.00, 0.36, 1.00
-    //   monikaPop  = 0.16, 1.12, 0.30, 1.00
-    //   quickFade  = 0.40, 0.00, 0.20, 1.00
-    //
-    // Niri uses springs/easing rather than Hyprland's bezier syntax.
 
     animations {
 
@@ -220,27 +198,20 @@
     // ──────────────────────────────────────────────────────────────
     // WINDOW APPEARANCE
     // ──────────────────────────────────────────────────────────────
-    //
-    // Hyprland:
-    //
-    //   active_opacity   = 0.94
-    //   inactive_opacity = 0.72
-    //
-    // Niri supports per-window opacity rules directly.
 
+    // Inactive windows.
     window-rule {
       match is-focused=false
-
       opacity 0.72
     }
 
+    // Focused windows.
     window-rule {
       match is-focused=true
-
       opacity 0.94
     }
 
-    // Keep windows square.
+    // Keep the square Hyprmoni appearance.
     window-rule {
       geometry-corner-radius 0
       clip-to-geometry true
@@ -248,21 +219,16 @@
 
 
     // ──────────────────────────────────────────────────────────────
-    // LAYER-SHELL COMPONENTS
+    // LAYER-SHELL
     // ──────────────────────────────────────────────────────────────
-    //
-    // Waybar and Rofi remain external applications.
-    // Their own Hyprmoni CSS remains untouched.
 
     layer-rule {
       match namespace="^waybar$"
-
       opacity 1.0
     }
 
     layer-rule {
       match namespace="^rofi$"
-
       opacity 0.96
     }
 
@@ -270,14 +236,6 @@
     // ──────────────────────────────────────────────────────────────
     // WORKSPACES
     // ──────────────────────────────────────────────────────────────
-    //
-    // Niri workspaces are dynamic by design.
-    //
-    // These named workspaces make the familiar Hyprland
-    // Super+1..0 workflow much more persistent.
-    //
-    // They remain movable between monitors, unlike Hyprland's
-    // hard-bound workspace IDs.
 
     workspace "1"
     workspace "2"
@@ -351,14 +309,10 @@
       // COLUMN MANAGEMENT
       // ────────────────────────────────────────────────────────────
 
-      // Closest Niri equivalent to pulling a window into/out
-      // of the column on the left.
-
       Super+P hotkey-overlay-title="Consume / Expel Window Left" {
         consume-or-expel-window-left;
       }
 
-      // Niri-native tabbed column mode.
       Super+D hotkey-overlay-title="Toggle Tabbed Column" {
         toggle-column-tabbed-display;
       }
@@ -383,8 +337,6 @@
       Super+Down {
         focus-window-down;
       }
-
-      // Vim-style navigation.
 
       Super+H {
         focus-column-left;
@@ -533,7 +485,7 @@
 
 
       // ────────────────────────────────────────────────────────────
-      // MEDIA / VOLUME
+      // VOLUME
       // ────────────────────────────────────────────────────────────
 
       XF86AudioRaiseVolume allow-when-locked=true {
@@ -567,7 +519,7 @@
 
 
       // ────────────────────────────────────────────────────────────
-      // MEDIA PLAYER
+      // MEDIA
       // ────────────────────────────────────────────────────────────
 
       XF86AudioNext allow-when-locked=true {
@@ -590,17 +542,6 @@
       // ────────────────────────────────────────────────────────────
       // SCREENSHOTS
       // ────────────────────────────────────────────────────────────
-      //
-      // Niri's native screenshot system replaces Hyprshot here.
-      //
-      // Super+Print:
-      //   focused window
-      //
-      // Super+Shift+Print:
-      //   interactive screenshot UI
-      //
-      // Print:
-      //   focused screen
 
       Super+Print {
         screenshot-window;
@@ -623,12 +564,10 @@
       // WALLPAPER
       // ────────────────────────────────────────────────────────────
 
-      // Open Waypaper.
       Super+W {
         spawn "waypaper";
       }
 
-      // Existing Hyprmoni wallpaper selector/state system.
       Super+Shift+W {
         spawn "hyprmoni-wallpapers";
       }
@@ -644,7 +583,7 @@
 
 
       // ────────────────────────────────────────────────────────────
-      // KEYBOARD SHORTCUT INHIBITION
+      // KEYBOARD INHIBITION
       // ────────────────────────────────────────────────────────────
 
       Super+Escape allow-inhibiting=false {
@@ -667,9 +606,7 @@
     // ──────────────────────────────────────────────────────────────
 
     overview {
-
       zoom 0.55
-
       backdrop-color "#0D0D0D"
 
       workspace-shadow {
@@ -699,7 +636,7 @@
   '';
 
   # ───────────────────────────────────────────────────────────────
-  # NIRI-SPECIFIC PACKAGES
+  # NIRI PACKAGES
   # ───────────────────────────────────────────────────────────────
 
   home.packages = with pkgs; [
