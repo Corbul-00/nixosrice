@@ -135,6 +135,7 @@
   (setq org-hide-emphasis-markers t
         org-startup-indented t
         org-startup-with-inline-images t
+        org-startup-folded 'overview
         org-image-actual-width nil
         org-ellipsis " ▾"
         org-return-follows-link t)
