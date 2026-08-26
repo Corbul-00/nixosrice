@@ -126,9 +126,6 @@
     protonup-ng
     protonup-qt
     protonplus
-    zsh
-    zsh-powerlevel10k
-    zsh-autosuggestions
     meslo-lgs-nf
     git
     doas
