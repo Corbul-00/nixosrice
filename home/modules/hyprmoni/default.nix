@@ -17,5 +17,6 @@
     ./lazyvim.nix
     ./doom/doom.nix
     ./vesktop.nix
+    ./mpv.nix
   ];
 }
