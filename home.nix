@@ -1,18 +1,18 @@
-{ config, pkgs, ... }: 
+{ config, pkgs, ... }:
 
 {
   home.username = "corbul";
   home.homeDirectory = "/home/corbul";
-  
- 
+
   imports = [
-     # Select exactly ONE complete visual profile here.
+    # Select exactly ONE complete visual profile here.
     # ./home/themes/default.nix
     # ./home/themes/pink.nix
     ./home/themes/hyprmoni.nix
     # ./home/themes/hyprlain.nix
 
     ./home/modules/fish/default.nix
+    ./home/modules/rg-cli/default.nix
     #./home/modules/fastfetch/default.nix
     ./home/modules/btop/default.nix
     ./home/modules/librewolf/default.nix
@@ -24,7 +24,6 @@
     ./home/modules/stash/default.nix
   ];
 
-
   #Cursor
 
   #home.pointerCursor = {
@@ -35,14 +34,13 @@
   #x11.enable = true;
   #};
 
-
   #Basic Neovim
   programs.neovim = {
     enable = true;
     defaultEditor = true;
   };
   #Default Browser
-  
+
   home.sessionVariables = {
     DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     BROWSER = "${pkgs.firefox}/bin/firefox";
