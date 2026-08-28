@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   palette = import ./palette.nix;
@@ -6,6 +6,19 @@ in
 {
   programs.mpv = {
     enable = true;
+
+    # Wrap mpv so MANGOHUD is forced off for it specifically, overriding
+    # the session-wide MANGOHUD=1 set by programs.mangohud.enableSessionWide.
+    # (Version-safe equivalent of extraMakeWrapperArgs, which this
+    # home-manager revision doesn't have yet.)
+    package = pkgs.symlinkJoin {
+      name = "mpv-no-mangohud";
+      paths = [ pkgs.mpv ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/mpv --set MANGOHUD 0
+      '';
+    };
 
     config = {
       # OSD / subtitle styling, matched to the hyprmoni palette.
@@ -28,14 +41,5 @@ in
       h = "playlist-prev";
       l = "playlist-next";
     };
-
-    # Forces MANGOHUD=0 for mpv specifically, overriding the session-wide
-    # MANGOHUD=1 set by programs.mangohud.enableSessionWide — mpv is fully
-    # skipped instead of just having its overlay hidden.
-    extraMakeWrapperArgs = [
-      "--set"
-      "MANGOHUD"
-      "0"
-    ];
   };
 }
