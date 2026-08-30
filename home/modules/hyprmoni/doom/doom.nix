@@ -1,4 +1,3 @@
-# home/modules/hyprmoni/doom/doom.nix
 { pkgs, nix-doom-emacs-unstraightened, ... }:
 let
   # Doom inserts the dashboard banner at native pixel size (no scaling),
