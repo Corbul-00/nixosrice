@@ -8,6 +8,10 @@
 
       src = ./rg-cli;
 
+      nativeBuildInputs = [
+        pkgs.autoPatchelfHook
+      ];
+
       dontUnpack = true;
       dontConfigure = true;
       dontBuild = true;
