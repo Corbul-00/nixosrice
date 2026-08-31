@@ -12,6 +12,10 @@
         pkgs.autoPatchelfHook
       ];
 
+      buildInputs = [
+        pkgs.stdenv.cc.cc.lib
+      ];
+
       dontUnpack = true;
       dontConfigure = true;
       dontBuild = true;
