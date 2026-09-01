@@ -191,6 +191,7 @@
     qemu
     OVMF
     vesktop
+    osu-lazer-bin
   ];
 
   #HYPRLAND_SDDM
