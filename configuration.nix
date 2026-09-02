@@ -192,6 +192,7 @@
     OVMF
     vesktop
     osu-lazer-bin
+    pipes-rs
   ];
 
   #HYPRLAND_SDDM
