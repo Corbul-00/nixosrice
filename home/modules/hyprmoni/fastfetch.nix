@@ -13,31 +13,22 @@ let
   # ------------------------------------------------------------
   # CUSTOM IMAGE SIZE
   #
-  # These values control the image independently.
+  # Square image container.
   #
-  # width  = horizontal terminal cells
-  # height = vertical terminal cells
+  # Change BOTH values together to keep it square.
   #
-  # Recommended starting point:
-  # width  = 24
-  # height = 18
+  # Smaller:
+  #   imageWidth = 16;
+  #   imageHeight = 16;
   #
-  # IMPORTANT:
-  # If preserveAspectRatio is true, Fastfetch will prevent
-  # distortion and prioritize keeping the original image ratio.
+  # Current balanced size:
   # ------------------------------------------------------------
 
-  imageWidth = 24;
+  imageWidth = 18;
   imageHeight = 18;
 
   # ------------------------------------------------------------
   # IMAGE POSITION / SPACING
-  #
-  # imagePaddingRight:
-  # Space between image and Fastfetch information.
-  #
-  # imagePaddingTop:
-  # Moves the image down.
   # ------------------------------------------------------------
 
   imagePaddingRight = 5;
@@ -47,35 +38,15 @@ let
   # INFORMATION SPACING
   #
   # keyWidth:
-  # Width reserved for icons + labels.
+  # Space reserved for icon + module name.
   #
   # separator:
-  # Space between label and system information.
-  #
-  # Recommended:
-  # keyWidth = 15 or 16
+  # Space between label and information.
   # ------------------------------------------------------------
 
-  keyWidth = 16;
+  keyWidth = 17;
 
   separator = "    ";
-
-  # ------------------------------------------------------------
-  # SECTION WIDTH
-  #
-  # This controls the visual width of the section headers.
-  #
-  # Increase the amount of ─ if your terminal is wider and
-  # you want a larger information structure.
-  # ------------------------------------------------------------
-
-  systemHeader = "╭────────────────── System Core ──────────────────╮";
-
-  softwareHeader = "╭─────────────────── Software ────────────────────╮";
-
-  hardwareHeader = "╭─────────────────── Hardware ────────────────────╮";
-
-  colorsHeader = "╭──────────────────── Colors ─────────────────────╮";
 
 in
 {
@@ -99,21 +70,21 @@ in
             # ======================================================
             # IMAGE DIMENSIONS
             #
-            # Change these variables at the top of the file:
-            #
-            # imageWidth
-            # imageHeight
+            # Keep these equal for a square image container.
             # ======================================================
 
             width = imageWidth;
             height = imageHeight;
 
-            # Prevent the image from becoming stretched.
-            preserveAspectRatio = true;
-
-            # ======================================================
-            # IMAGE POSITION
-            # ======================================================
+            # NOTE:
+            #
+            # Set to false so Fastfetch uses the exact square
+            # dimensions instead of automatically changing one
+            # dimension to preserve the original image ratio.
+            #
+            # If the source image itself isn't square, this may
+            # stretch it slightly.
+            preserveAspectRatio = false;
 
             padding = {
               top = imagePaddingTop;
@@ -141,32 +112,16 @@ in
 
       display = {
 
-        # Space between key and value.
         separator = separator;
 
         color = {
-
-          # Icons and module names.
           keys = palette.pink;
-
-          # Section/title emphasis.
           title = palette.hotPink;
-
-          # Hardware/system information.
           output = palette.blush;
-
-          # Separators and decorative elements.
           separator = palette.wine;
         };
 
         key = {
-
-          # Width of:
-          #
-          # 󰣇 OS
-          #  Kernel
-          # etc.
-          #
           width = keyWidth;
         };
       };
@@ -177,9 +132,9 @@ in
 
       modules = [
 
-        # ========================================================
+        # --------------------------------------------------------
         # TITLE
-        # ========================================================
+        # --------------------------------------------------------
 
         {
           type = "title";
@@ -190,13 +145,8 @@ in
         }
 
         # ========================================================
-        # SYSTEM CORE
+        # SYSTEM INFORMATION
         # ========================================================
-
-        {
-          type = "custom";
-          format = systemHeader;
-        }
 
         {
           type = "os";
@@ -219,14 +169,18 @@ in
           key = "󰔛  Uptime";
         }
 
-        # ========================================================
-        # SOFTWARE
-        # ========================================================
+        # --------------------------------------------------------
+        # SPACE BETWEEN SYSTEM AND SOFTWARE
+        # --------------------------------------------------------
 
         {
           type = "custom";
-          format = softwareHeader;
+          format = "";
         }
+
+        # ========================================================
+        # SOFTWARE INFORMATION
+        # ========================================================
 
         {
           type = "wm";
@@ -246,14 +200,18 @@ in
           key = "󰏖  Packages";
         }
 
-        # ========================================================
-        # HARDWARE
-        # ========================================================
+        # --------------------------------------------------------
+        # SPACE BETWEEN SOFTWARE AND HARDWARE
+        # --------------------------------------------------------
 
         {
           type = "custom";
-          format = hardwareHeader;
+          format = "";
         }
+
+        # ========================================================
+        # HARDWARE INFORMATION
+        # ========================================================
 
         {
           type = "cpu";
@@ -283,14 +241,18 @@ in
           folders = "/";
         }
 
-        # ========================================================
-        # COLORS
-        # ========================================================
+        # --------------------------------------------------------
+        # SPACE BEFORE COLORS
+        # --------------------------------------------------------
 
         {
           type = "custom";
-          format = colorsHeader;
+          format = "";
         }
+
+        # ========================================================
+        # COLORS
+        # ========================================================
 
         {
           type = "colors";
