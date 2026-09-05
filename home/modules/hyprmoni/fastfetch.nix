@@ -14,7 +14,7 @@ in
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
       # ============================================================
-      # LOGO
+      # LOGO / IMAGE
       # ============================================================
 
       logo =
@@ -23,12 +23,29 @@ in
             type = "kitty-direct";
             source = customImage;
 
-            # Only set height so Fastfetch keeps the image's
-            # original aspect ratio automatically.
-            height = 18;
+            # ======================================================
+            # IMAGE SIZE
+            #
+            # CHANGE THIS if you want the image larger/smaller.
+            #
+            # Recommended range:
+            #   14 = small
+            #   16 = balanced (recommended)
+            #   18 = large
+            # ======================================================
+
+            height = 16;
 
             padding = {
               top = 1;
+
+              # ====================================================
+              # SPACE BETWEEN IMAGE AND SYSTEM INFORMATION
+              #
+              # Increase = more horizontal separation.
+              # Decrease = information moves closer to image.
+              # ====================================================
+
               right = 5;
             };
           }
@@ -47,11 +64,18 @@ in
           };
 
       # ============================================================
-      # DISPLAY
+      # GLOBAL DISPLAY SETTINGS
       # ============================================================
 
       display = {
-        separator = "  ";
+
+        # ==========================================================
+        # SPACE BETWEEN KEY AND VALUE
+        #
+        # Increase for more breathing room.
+        # ==========================================================
+
+        separator = "   ";
 
         color = {
           keys = palette.pink;
@@ -61,7 +85,19 @@ in
         };
 
         key = {
-          width = 13;
+
+          # ========================================================
+          # KEY COLUMN WIDTH
+          #
+          # Increase = values move further right.
+          #
+          # Recommended:
+          #   13 = compact
+          #   15 = balanced
+          #   17 = spacious
+          # ========================================================
+
+          width = 15;
         };
       };
 
@@ -87,12 +123,17 @@ in
 
         {
           type = "custom";
-          format = "╭──────────── System Core ────────────╮";
+
+          # Change the amount of ─ if you want a wider header.
+          format = "╭──────────────── System Core ────────────────╮";
         }
 
         {
           type = "os";
-          key = "󰣇  OS";
+
+          # NixOS logo.
+          key = "  OS";
+
           format = "{pretty-name}";
         }
 
@@ -112,7 +153,7 @@ in
 
         {
           type = "custom";
-          format = "╭───────────── Software ──────────────╮";
+          format = "╭───────────────── Software ──────────────────╮";
         }
 
         {
@@ -136,7 +177,7 @@ in
 
         {
           type = "custom";
-          format = "╭───────────── Hardware ──────────────╮";
+          format = "╭───────────────── Hardware ──────────────────╮";
         }
 
         {
@@ -168,7 +209,7 @@ in
 
         {
           type = "custom";
-          format = "╭────────────── Colors ───────────────╮";
+          format = "╭────────────────── Colors ───────────────────╮";
         }
 
         {
