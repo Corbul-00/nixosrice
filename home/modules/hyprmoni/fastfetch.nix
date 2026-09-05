@@ -13,88 +13,168 @@ in
     settings = {
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
+      # ============================================================
+      # LOGO
+      # ============================================================
+
       logo =
         if hasCustomImage then
           {
             type = "kitty-direct";
             source = customImage;
-            # Match the image height to the ten-row system-information block.
-            width = 20;
-            height = 10;
+
+            # Larger visual presence, closer to the reference layout.
+            width = 32;
+            height = 24;
+
             padding = {
               top = 1;
-              right = 4;
+              right = 5;
             };
           }
         else
           {
             type = "builtin";
             source = "nixos_small";
-            color."1" = "magenta";
-            color."2" = "white";
+
+            color."1" = palette.pink;
+            color."2" = palette.blush;
+
             padding = {
               top = 1;
               right = 5;
             };
           };
 
+      # ============================================================
+      # GLOBAL DISPLAY
+      # ============================================================
+
       display = {
         separator = "  ";
+
         color = {
           keys = palette.pink;
           title = palette.hotPink;
           output = palette.blush;
           separator = palette.wine;
         };
+
+        # Gives the information a wider and more spacious appearance.
         key = {
-          width = 13;
+          width = 15;
         };
       };
 
+      # ============================================================
+      # MODULES
+      # ============================================================
+
       modules = [
+
+        # ----------------------------------------------------------
+        # TITLE
+        # ----------------------------------------------------------
+
         {
           type = "title";
           key = "";
           format = "{user-name}@{host-name}";
         }
+
+        {
+          type = "custom";
+          format = "╭────────────── System Core ──────────────╮";
+        }
+
+        # ----------------------------------------------------------
+        # SYSTEM CORE
+        # ----------------------------------------------------------
+
         {
           type = "os";
-          key = "  OS";
+          key = "󰣇  OS";
           format = "{pretty-name}";
         }
+
         {
           type = "kernel";
           key = "  Kernel";
         }
+
+        {
+          type = "uptime";
+          key = "󰔛  Uptime";
+        }
+
+        {
+          type = "custom";
+          format = "╭─────────────── Software ────────────────╮";
+        }
+
+        # ----------------------------------------------------------
+        # SOFTWARE
+        # ----------------------------------------------------------
+
+        {
+          type = "wm";
+          key = "󱂬  WM";
+        }
+
+        {
+          type = "shell";
+          key = "  Shell";
+        }
+
+        {
+          type = "packages";
+          key = "󰏖  Packages";
+        }
+
+        {
+          type = "custom";
+          format = "╭─────────────── Hardware ────────────────╮";
+        }
+
+        # ----------------------------------------------------------
+        # HARDWARE
+        # ----------------------------------------------------------
+
         {
           type = "cpu";
           key = "  CPU";
         }
+
         {
           type = "gpu";
           key = "󰢮  GPU";
         }
+
         {
           type = "memory";
           key = "  RAM";
+
           percent.type = [ "num" ];
         }
+
         {
           type = "disk";
           key = "  Disk";
           folders = "/";
         }
+
         {
-          type = "packages";
-          key = "󰏖  Packages";
+          type = "custom";
+          format = "╭──────────────── Colors ─────────────────╮";
         }
+
+        # ----------------------------------------------------------
+        # COLORS
+        # ----------------------------------------------------------
+
         {
-          type = "shell";
-          key = "  Shell";
-        }
-        {
-          type = "uptime";
-          key = "󰔛  Uptime";
+          type = "colors";
+          key = "󰏘  Colors";
         }
       ];
     };
