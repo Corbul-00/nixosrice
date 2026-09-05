@@ -5,17 +5,90 @@ let
   assets = toString ./assets;
   customImage = "${assets}/fastfetch.png";
   hasCustomImage = builtins.pathExists customImage;
+
+  # ============================================================
+  #                    EASY TWEAK SETTINGS
+  # ============================================================
+
+  # ------------------------------------------------------------
+  # CUSTOM IMAGE SIZE
+  #
+  # These values control the image independently.
+  #
+  # width  = horizontal terminal cells
+  # height = vertical terminal cells
+  #
+  # Recommended starting point:
+  # width  = 24
+  # height = 18
+  #
+  # IMPORTANT:
+  # If preserveAspectRatio is true, Fastfetch will prevent
+  # distortion and prioritize keeping the original image ratio.
+  # ------------------------------------------------------------
+
+  imageWidth = 24;
+  imageHeight = 18;
+
+  # ------------------------------------------------------------
+  # IMAGE POSITION / SPACING
+  #
+  # imagePaddingRight:
+  # Space between image and Fastfetch information.
+  #
+  # imagePaddingTop:
+  # Moves the image down.
+  # ------------------------------------------------------------
+
+  imagePaddingRight = 5;
+  imagePaddingTop = 1;
+
+  # ------------------------------------------------------------
+  # INFORMATION SPACING
+  #
+  # keyWidth:
+  # Width reserved for icons + labels.
+  #
+  # separator:
+  # Space between label and system information.
+  #
+  # Recommended:
+  # keyWidth = 15 or 16
+  # ------------------------------------------------------------
+
+  keyWidth = 16;
+
+  separator = "    ";
+
+  # ------------------------------------------------------------
+  # SECTION WIDTH
+  #
+  # This controls the visual width of the section headers.
+  #
+  # Increase the amount of ─ if your terminal is wider and
+  # you want a larger information structure.
+  # ------------------------------------------------------------
+
+  systemHeader = "╭────────────────── System Core ──────────────────╮";
+
+  softwareHeader = "╭─────────────────── Software ────────────────────╮";
+
+  hardwareHeader = "╭─────────────────── Hardware ────────────────────╮";
+
+  colorsHeader = "╭──────────────────── Colors ─────────────────────╮";
+
 in
 {
   programs.fastfetch = {
     enable = true;
 
     settings = {
+
       "$schema" = "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json";
 
-      # ============================================================
-      # LOGO / IMAGE
-      # ============================================================
+      # ==========================================================
+      #                         LOGO
+      # ==========================================================
 
       logo =
         if hasCustomImage then
@@ -24,31 +97,30 @@ in
             source = customImage;
 
             # ======================================================
-            # IMAGE SIZE
+            # IMAGE DIMENSIONS
             #
-            # CHANGE THIS if you want the image larger/smaller.
+            # Change these variables at the top of the file:
             #
-            # Recommended range:
-            #   14 = small
-            #   16 = balanced (recommended)
-            #   18 = large
+            # imageWidth
+            # imageHeight
             # ======================================================
 
-            height = 14;
+            width = imageWidth;
+            height = imageHeight;
+
+            # Prevent the image from becoming stretched.
+            preserveAspectRatio = true;
+
+            # ======================================================
+            # IMAGE POSITION
+            # ======================================================
 
             padding = {
-              top = 1;
-
-              # ====================================================
-              # SPACE BETWEEN IMAGE AND SYSTEM INFORMATION
-              #
-              # Increase = more horizontal separation.
-              # Decrease = information moves closer to image.
-              # ====================================================
-
-              right = 5;
+              top = imagePaddingTop;
+              right = imagePaddingRight;
             };
           }
+
         else
           {
             type = "builtin";
@@ -58,80 +130,78 @@ in
             color."2" = palette.blush;
 
             padding = {
-              top = 1;
-              right = 5;
+              top = imagePaddingTop;
+              right = imagePaddingRight;
             };
           };
 
-      # ============================================================
-      # GLOBAL DISPLAY SETTINGS
-      # ============================================================
+      # ==========================================================
+      #                    GLOBAL DISPLAY
+      # ==========================================================
 
       display = {
 
-        # ==========================================================
-        # SPACE BETWEEN KEY AND VALUE
-        #
-        # Increase for more breathing room.
-        # ==========================================================
-
-        separator = "   ";
+        # Space between key and value.
+        separator = separator;
 
         color = {
+
+          # Icons and module names.
           keys = palette.pink;
+
+          # Section/title emphasis.
           title = palette.hotPink;
+
+          # Hardware/system information.
           output = palette.blush;
+
+          # Separators and decorative elements.
           separator = palette.wine;
         };
 
         key = {
 
-          # ========================================================
-          # KEY COLUMN WIDTH
+          # Width of:
           #
-          # Increase = values move further right.
+          # 󰣇 OS
+          #  Kernel
+          # etc.
           #
-          # Recommended:
-          #   13 = compact
-          #   15 = balanced
-          #   17 = spacious
-          # ========================================================
-
-          width = 14;
+          width = keyWidth;
         };
       };
 
-      # ============================================================
-      # MODULES
-      # ============================================================
+      # ==========================================================
+      #                        MODULES
+      # ==========================================================
 
       modules = [
 
-        # ----------------------------------------------------------
+        # ========================================================
         # TITLE
-        # ----------------------------------------------------------
+        # ========================================================
 
         {
           type = "title";
+
           key = "";
+
           format = "{user-name}@{host-name}";
         }
 
-        # ==========================================================
+        # ========================================================
         # SYSTEM CORE
-        # ==========================================================
+        # ========================================================
 
         {
           type = "custom";
-
-          # Change the amount of ─ if you want a wider header.
-          format = "╭──────────────── System Core ────────────────╮";
+          format = systemHeader;
         }
 
         {
           type = "os";
 
-          # NixOS logo.
+          # Correct NixOS Nerd Font icon.
           key = "  OS";
 
           format = "{pretty-name}";
@@ -139,59 +209,67 @@ in
 
         {
           type = "kernel";
+
           key = "  Kernel";
         }
 
         {
           type = "uptime";
+
           key = "󰔛  Uptime";
         }
 
-        # ==========================================================
+        # ========================================================
         # SOFTWARE
-        # ==========================================================
+        # ========================================================
 
         {
           type = "custom";
-          format = "╭───────────────── Software ──────────────────╮";
+          format = softwareHeader;
         }
 
         {
           type = "wm";
+
           key = "󱂬  WM";
         }
 
         {
           type = "shell";
+
           key = "  Shell";
         }
 
         {
           type = "packages";
+
           key = "󰏖  Packages";
         }
 
-        # ==========================================================
+        # ========================================================
         # HARDWARE
-        # ==========================================================
+        # ========================================================
 
         {
           type = "custom";
-          format = "╭───────────────── Hardware ──────────────────╮";
+          format = hardwareHeader;
         }
 
         {
           type = "cpu";
+
           key = "  CPU";
         }
 
         {
           type = "gpu";
+
           key = "󰢮  GPU";
         }
 
         {
           type = "memory";
+
           key = "  RAM";
 
           percent.type = [ "num" ];
@@ -199,21 +277,24 @@ in
 
         {
           type = "disk";
+
           key = "  Disk";
+
           folders = "/";
         }
 
-        # ==========================================================
+        # ========================================================
         # COLORS
-        # ==========================================================
+        # ========================================================
 
         {
           type = "custom";
-          format = "╭────────────────── Colors ───────────────────╮";
+          format = colorsHeader;
         }
 
         {
           type = "colors";
+
           key = "󰏘  Colors";
         }
       ];
