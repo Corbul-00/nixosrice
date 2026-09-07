@@ -193,6 +193,7 @@
     vesktop
     osu-lazer-bin
     pipes-rs
+    pcsx2
   ];
 
   #HYPRLAND_SDDM
