@@ -214,15 +214,11 @@
 ;; Reddit
 (use-package! md4rd
   :config
-  ;; Default subreddits loaded by M-x md4rd
-  ;; You can combine any of them later with + if you want (e.g. emacs+MASFandom)
   (setq md4rd-subs-active
         '(emacs
           MASFandom
           GenshinImpactNSFW
           streetmoe))
-
-  ;; Optional but recommended: nicer indentation of the post tree
   (add-hook 'md4rd-mode-hook #'md4rd-indent-all-the-lines)
 
 ;;; Elcord ----------------------------------------------------------------------
