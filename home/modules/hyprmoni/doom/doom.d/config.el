@@ -211,16 +211,30 @@
 (after! evil
   (define-key evil-normal-state-map (kbd "C-n") #'my/treemacs-toggle))
 
-;;; Elcord ----------------------------------------------------------------------
-(after! elcord
-  (setq elcord-editor-name "Doom Emacs"
-        elcord-editor-icon "doom_icon"
-        elcord-use-major-mode-as-main-icon nil
-        elcord-display-buffer-details t
-        elcord-display-line-numbers nil
-        elcord-refresh-rate 15
-        elcord-idle-timer 300
-        elcord-idle-message "Taking a break"
-        elcord-quiet t)
+;; Reddit
+(use-package! md4rd
+  :config
+  ;; Default subreddits loaded by M-x md4rd
+  ;; You can combine any of them later with + if you want (e.g. emacs+MASFandom)
+  (setq md4rd-subs-active
+        '(emacs
+          MASFandom
+          GenshinImpactNSFW
+          streetmoe))
 
-  (elcord-mode 1))
+  ;; Optional but recommended: nicer indentation of the post tree
+  (add-hook 'md4rd-mode-hook #'md4rd-indent-all-the-lines)
+
+;;; Elcord ----------------------------------------------------------------------
+  (after! elcord
+    (setq elcord-editor-name "Doom Emacs"
+          elcord-editor-icon "doom_icon"
+          elcord-use-major-mode-as-main-icon nil
+          elcord-display-buffer-details t
+          elcord-display-line-numbers nil
+          elcord-refresh-rate 15
+          elcord-idle-timer 300
+          elcord-idle-message "Taking a break"
+          elcord-quiet t)
+
+    (elcord-mode 1))
