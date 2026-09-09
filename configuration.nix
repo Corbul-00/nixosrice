@@ -123,7 +123,6 @@
     winetricks
     wine
     wineWowPackages.staging
-    bottles
     protonup-ng
     protonup-qt
     protonplus
