@@ -194,6 +194,7 @@
     osu-lazer-bin
     pipes-rs
     pcsx2
+    rust-analyzer
   ];
 
   #HYPRLAND_SDDM
