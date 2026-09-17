@@ -43,6 +43,7 @@
 
        :lang
        emacs-lisp
+       (rust +lsp)
        json
        markdown
        nix
