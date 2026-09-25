@@ -195,6 +195,7 @@
     pipes-rs
     pcsx2
     rust-analyzer
+    krita
   ];
 
   #HYPRLAND_SDDM
