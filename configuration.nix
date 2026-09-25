@@ -196,6 +196,8 @@
     pcsx2
     rust-analyzer
     krita
+    xournalpp
+    kanjidraw
   ];
 
   #HYPRLAND_SDDM
