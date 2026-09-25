@@ -320,6 +320,11 @@
     # Add more if it complains (see below)
   ];
 
+  #OpenTabletDriver & kernelModules
+  hardware.opentabletdriver.enable = true;
+  hardware.uinput.enable = true;
+  boot.kernelModules = [ "uinput" ];
+
   #Ollama
 
   # Some programs need SUID wrappers, can be configured further or are
