@@ -123,6 +123,9 @@
     winetricks
     wine
     wineWowPackages.staging
+    unzip
+    cabextract
+    p7zip
     protonup-ng
     protonup-qt
     protonplus
