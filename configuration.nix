@@ -129,6 +129,7 @@
     protonup-ng
     protonup-qt
     protonplus
+    protontricks
     meslo-lgs-nf
     git
     doas
