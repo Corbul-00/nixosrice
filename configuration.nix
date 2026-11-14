@@ -202,6 +202,7 @@
     krita
     xournalpp
     kanjidraw
+    rclone
   ];
 
   #HYPRLAND_SDDM
