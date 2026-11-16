@@ -183,10 +183,7 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     kdePackages.kdenlive
-    jami
     gimp
-    opencode
-    codex
     openvpn
     gallery-dl
     imgbrd-grabber
@@ -208,7 +205,7 @@
     enable = true;
     withUWSM = true;
   };
-  programs.niri.enable = true;
+  #programs.niri.enable = true;
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
