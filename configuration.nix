@@ -198,6 +198,7 @@
     xournalpp
     kanjidraw
     rclone
+    python3
   ];
 
   #HYPRLAND_SDDM
